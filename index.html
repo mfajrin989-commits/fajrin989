@@ -551,17 +551,7 @@ p.style.animationDuration=(8+Math.random()*12)+"s";
 p.style.animationDelay=(Math.random()*8)+"s";
 section.appendChild(p);
 }
-
-/* Tambahan: kelopak bunga melayang */
-for(let i=0;i<3;i++){
-const petal=document.createElement("span");
-petal.className="flower-petal";
-petal.style.left=Math.random()*100+"%";
-petal.style.animationDuration=(12+Math.random()*10)+"s";
-petal.style.animationDelay=(Math.random()*10)+"s";
-section.appendChild(petal);
-}
-
+   
 /* Tambahan: cahaya gold */
 for(let i=0;i<2;i++){
 const light=document.createElement("span");
