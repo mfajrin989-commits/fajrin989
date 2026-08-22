@@ -36,7 +36,7 @@ html{
   padding:0;
   scroll-behavior:smooth;
 
-  /* Scroll bebas, tidak lompat antar halaman */
+  /* Scroll bebas */
   scroll-snap-type:none;
 }
 
@@ -76,8 +76,6 @@ section{
   justify-content:center;
   position:relative;
   overflow:hidden;
-
-  /* Tidak lagi snap */
   scroll-snap-align:none;
 }
 
@@ -237,10 +235,6 @@ h1,h2,h3{
     ),
     url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=90")
     center/cover;
-}
-
-.gallery{
-  background:var(--cream);
 }
 
 .gift{
@@ -655,7 +649,7 @@ h1,h2,h3{
 }
 
 .comment-list{
-  max-height:155px;
+  max-height:300px;
   overflow:auto;
   display:flex;
   flex-direction:column;
@@ -673,6 +667,13 @@ h1,h2,h3{
 
 .comment strong{
   color:#806638;
+}
+
+.comment-time{
+  display:block;
+  margin-top:5px;
+  color:#999;
+  font-size:.58rem;
 }
 
 .stats{
@@ -778,8 +779,7 @@ h1,h2,h3{
 
 
 /* =========================
-   NAVIGATION BULAT
-   DIMATIKAN
+   NAVIGASI BULAT DIMATIKAN
 ========================= */
 
 .side{
@@ -880,8 +880,7 @@ h1,h2,h3{
 
 
 /* =====================================================
-   PERBAIKAN UTAMA UNTUK HP
-   MEMAKSA WEBSITE FULL WIDTH
+   FULL WIDTH HP
 ===================================================== */
 
 html,
@@ -990,7 +989,6 @@ body{
     font-size:4.7rem;
   }
 
-  /* Tombol musik tetap berada di dalam area layar */
   .music{
     right:15px;
     bottom:15px;
@@ -1014,11 +1012,29 @@ body{
   .quote{
     max-width:100%;
   }
+
+  .stats{
+    gap:6px;
+  }
+
+  .stat{
+    min-width:0;
+    flex:1;
+    padding:10px 5px;
+  }
+
+  .stat b{
+    font-size:1.25rem;
+  }
+
+  .stat small{
+    font-size:.48rem;
+  }
+
 }
 
 </style>
 </head>
-
 
 <body class="locked">
 
@@ -1067,10 +1083,6 @@ body{
 
 </div>
 
-
-<!-- =========================
-     MAIN CONTENT
-========================= -->
 
 <main id="content">
 
@@ -1133,7 +1145,15 @@ body{
     </p>
 
     <div class="couple-grid">
-        
+
+      <div class="person">
+
+        <div class="photo">
+          <img
+            src="ChatGPT Image Aug 17, 2026, 11_32_30 AM.png"
+            alt="Foto Jihan">
+        </div>
+
         <h2 class="person-name script">
           Jihan [Nama Lengkap]
         </h2>
@@ -1153,6 +1173,14 @@ body{
         &
       </div>
 
+
+      <div class="person">
+
+        <div class="photo">
+          <img
+            src="ChatGPT Image Aug 17, 2026, 11_26_06 AM.png"
+            alt="Foto Risaldi">
+        </div>
 
         <h2 class="person-name script">
           Risaldi [Nama Lengkap]
@@ -1191,7 +1219,6 @@ body{
       Rangkaian Acara
     </h2>
 
-
     <div class="countdown">
 
       <div class="time">
@@ -1219,7 +1246,6 @@ body{
 
     <div class="cards">
 
-
       <div class="card">
 
         <div class="icon">
@@ -1246,7 +1272,10 @@ body{
           [Alamat Lengkap]
         </p>
 
-        <a href="https://maps.google.com" target="_blank" class="btn">
+        <a
+          href="https://maps.google.com"
+          target="_blank"
+          class="btn">
           📍 Buka Maps
         </a>
 
@@ -1286,7 +1315,10 @@ body{
           [Alamat Lengkap]
         </p>
 
-        <a href="https://maps.google.com" target="_blank" class="btn">
+        <a
+          href="https://maps.google.com"
+          target="_blank"
+          class="btn">
           📍 Buka Maps
         </a>
 
@@ -1344,7 +1376,9 @@ body{
           a.n. [Nama Pemilik Rekening]
         </p>
 
-        <button class="btn" onclick="copyAccount()">
+        <button
+          class="btn"
+          onclick="copyAccount()">
           📋 Salin Rekening
         </button>
 
@@ -1380,6 +1414,8 @@ body{
       </p>
 
 
+      <!-- STATISTIK DARI GOOGLE SHEETS -->
+
       <div class="stats">
 
         <div class="stat">
@@ -1393,26 +1429,33 @@ body{
         </div>
 
         <div class="stat">
-          <b id="countTotal">1</b>
+          <b id="countTotal">0</b>
           <small>UCAPAN</small>
         </div>
 
       </div>
 
 
+      <!-- FORM RSVP -->
+
       <form id="rsvpForm">
 
         <div class="form-group">
+
           <input
             id="guestName"
             type="text"
             placeholder="Nama Anda"
             required>
+
         </div>
+
 
         <div class="form-group">
 
-          <select id="attendance" required>
+          <select
+            id="attendance"
+            required>
 
             <option value="">
               Pilih Kehadiran
@@ -1430,6 +1473,7 @@ body{
 
         </div>
 
+
         <div class="form-group">
 
           <textarea
@@ -1440,15 +1484,20 @@ body{
 
         </div>
 
+
         <button
           class="btn"
           style="width:100%"
           type="submit">
+
           💌 Kirim Ucapan
+
         </button>
 
       </form>
 
+
+      <!-- DAFTAR UCAPAN -->
 
       <div class="comments">
 
@@ -1456,21 +1505,16 @@ body{
           Ucapan dari tamu
         </p>
 
-        <div id="commentList" class="comment-list">
 
-          <div class="comment">
+        <div
+          id="commentList"
+          class="comment-list">
 
-            <strong>
-              Ahmad Fauzi
-            </strong>
+          <div
+            class="comment"
+            style="text-align:center;color:#999">
 
-            <span style="color:#41965b">
-              • Hadir
-            </span>
-
-            <br>
-
-            Barakallah, semoga menjadi keluarga sakinah mawaddah warahmah.
+            Memuat ucapan...
 
           </div>
 
@@ -1523,7 +1567,9 @@ body{
       Kami yang berbahagia,
     </p>
 
-    <div class="script" style="font-size:4rem">
+    <div
+      class="script"
+      style="font-size:4rem">
       Jihan & Risaldi
     </div>
 
@@ -1545,8 +1591,15 @@ body{
      AUDIO
 ========================= -->
 
-<audio id="music" loop preload="auto">
-  <source src="lagu-pernikahan.mp3" type="audio/mpeg">
+<audio
+  id="music"
+  loop
+  preload="auto">
+
+  <source
+    src="lagu-pernikahan.mp3"
+    type="audio/mpeg">
+
 </audio>
 
 
@@ -1565,10 +1618,13 @@ body{
 </button>
 
 
-<!-- NAVIGASI BULAT DIHILANGKAN -->
+<!-- =========================
+     LIGHTBOX
+========================= -->
 
-
-<div id="lightbox" class="lightbox">
+<div
+  id="lightbox"
+  class="lightbox">
 
   <div class="close-lightbox">
     ×
@@ -1581,14 +1637,18 @@ body{
 </div>
 
 
-<div id="toast" class="toast"></div>
+<div
+  id="toast"
+  class="toast">
+</div>
 
 
 <script>
 
-/* =========================
+
+/* =========================================================
    KONFIGURASI
-========================= */
+========================================================= */
 
 const CONFIG = {
 
@@ -1596,9 +1656,8 @@ const CONFIG = {
     "2026-10-10T08:00:00+08:00",
 
   /*
-   OPSIONAL:
-   Tempel URL Google Apps Script Web App Anda di bawah.
-   Jika kosong, RSVP tetap tampil lokal di browser.
+   URL GOOGLE APPS SCRIPT WEB APP
+   YANG SUDAH ANDA TEST DAN BERHASIL
   */
 
   googleSheetsEndpoint:
@@ -1610,11 +1669,9 @@ const CONFIG = {
 };
 
 
-/* =========================
+/* =========================================================
    PERSONALIZED GUEST
-   Contoh:
-   index.html?to=Ahmad%20Fauzi
-========================= */
+========================================================= */
 
 const params =
   new URLSearchParams(location.search);
@@ -1626,19 +1683,22 @@ const guest =
 if(guest){
 
   const greeting =
-    document.getElementById("guestGreeting");
+    document.getElementById(
+      "guestGreeting"
+    );
 
   greeting.textContent =
     "Kepada Yth. " + guest;
 
   greeting.style.display =
     "block";
+
 }
 
 
-/* =========================
-   OPEN
-========================= */
+/* =========================================================
+   OPEN COVER
+========================================================= */
 
 const cover =
   document.getElementById("cover");
@@ -1656,63 +1716,82 @@ const musicButton =
   document.getElementById("musicButton");
 
 
-openButton.addEventListener("click",()=>{
+openButton.addEventListener(
+  "click",
+  ()=>{
 
-  document.body.classList.remove("locked");
-
-  content.style.display =
-    "block";
-
-  cover.classList.add("opened");
-
-  musicButton.style.display =
-    "block";
-
-  music.play()
-    .then(()=>{
-      musicButton.classList.add("playing");
-    })
-    .catch(()=>{});
-
-  setTimeout(()=>{
-    cover.remove();
-  },1100);
-
-  createParticles();
-
-});
-
-
-/* =========================
-   MUSIC
-========================= */
-
-musicButton.addEventListener("click",()=>{
-
-  if(music.paused){
-
-    music.play();
-
-    musicButton.classList.add(
-      "playing"
+    document.body.classList.remove(
+      "locked"
     );
 
-  }else{
+    content.style.display =
+      "block";
 
-    music.pause();
-
-    musicButton.classList.remove(
-      "playing"
+    cover.classList.add(
+      "opened"
     );
+
+    musicButton.style.display =
+      "block";
+
+
+    music.play()
+      .then(()=>{
+
+        musicButton.classList.add(
+          "playing"
+        );
+
+      })
+      .catch(()=>{});
+
+
+    setTimeout(()=>{
+
+      cover.remove();
+
+    },1100);
+
+
+    createParticles();
 
   }
+);
 
-});
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+musicButton.addEventListener(
+  "click",
+  ()=>{
+
+    if(music.paused){
+
+      music.play();
+
+      musicButton.classList.add(
+        "playing"
+      );
+
+    }else{
+
+      music.pause();
+
+      musicButton.classList.remove(
+        "playing"
+      );
+
+    }
+
+  }
+);
 
 
-/* =========================
-   REVEAL
-========================= */
+/* =========================================================
+   REVEAL ANIMATION
+========================================================= */
 
 const revealObserver =
   new IntersectionObserver(
@@ -1740,24 +1819,15 @@ const revealObserver =
 document
   .querySelectorAll(".reveal")
   .forEach(el=>{
+
     revealObserver.observe(el);
+
   });
 
 
-/* =========================
-   SECTION NAVIGATION
-   BULATAN SUDAH DIHILANGKAN
-========================= */
-
-const sections =
-  [...document.querySelectorAll(
-    "#content section"
-  )];
-
-
-/* =========================
+/* =========================================================
    TOP BUTTON
-========================= */
+========================================================= */
 
 const topButton =
   document.getElementById(
@@ -1782,20 +1852,24 @@ window.addEventListener(
 topButton.addEventListener(
   "click",
   ()=>{
+
     window.scrollTo({
       top:0,
       behavior:"smooth"
     });
+
   }
 );
 
 
-/* =========================
+/* =========================================================
    COUNTDOWN
-========================= */
+========================================================= */
 
 const target =
-  new Date(CONFIG.weddingDate);
+  new Date(
+    CONFIG.weddingDate
+  );
 
 
 function updateCountdown(){
@@ -1820,41 +1894,57 @@ function updateCountdown(){
     });
 
     return;
+
   }
 
 
   const days =
-    Math.floor(d/86400000);
+    Math.floor(
+      d/86400000
+    );
 
   const hours =
-    Math.floor(d/3600000)%24;
+    Math.floor(
+      d/3600000
+    )%24;
 
   const minutes =
-    Math.floor(d/60000)%60;
+    Math.floor(
+      d/60000
+    )%60;
 
   const seconds =
-    Math.floor(d/1000)%60;
+    Math.floor(
+      d/1000
+    )%60;
 
 
   document
     .getElementById("days")
     .textContent =
-      String(days).padStart(2,"0");
+      String(days)
+      .padStart(2,"0");
+
 
   document
     .getElementById("hours")
     .textContent =
-      String(hours).padStart(2,"0");
+      String(hours)
+      .padStart(2,"0");
+
 
   document
     .getElementById("minutes")
     .textContent =
-      String(minutes).padStart(2,"0");
+      String(minutes)
+      .padStart(2,"0");
+
 
   document
     .getElementById("seconds")
     .textContent =
-      String(seconds).padStart(2,"0");
+      String(seconds)
+      .padStart(2,"0");
 
 }
 
@@ -1867,9 +1957,9 @@ setInterval(
 );
 
 
-/* =========================
-   COPY REKENING
-========================= */
+/* =========================================================
+   TOAST
+========================================================= */
 
 function showToast(msg){
 
@@ -1885,22 +1975,30 @@ function showToast(msg){
     "show"
   );
 
+
   clearTimeout(
     window.toastTimer
   );
 
+
   window.toastTimer =
     setTimeout(
       ()=>{
+
         t.classList.remove(
           "show"
         );
+
       },
       2400
     );
 
 }
 
+
+/* =========================================================
+   COPY REKENING
+========================================================= */
 
 function copyAccount(){
 
@@ -1916,53 +2014,33 @@ function copyAccount(){
   navigator.clipboard
     .writeText(n)
     .then(()=>{
+
       showToast(
         "Nomor rekening berhasil disalin ✨"
       );
+
     })
     .catch(()=>{
+
       showToast(
         "Gagal menyalin nomor rekening"
       );
+
     });
 
 }
 
 
-/* =========================
-   RSVP
-   Local + optional Google Sheets
-========================= */
-
-let hadir = 0;
-let tidak = 0;
-let total = 1;
-
-
-function updateStats(){
-
-  document
-    .getElementById("countHadir")
-    .textContent =
-      hadir;
-
-  document
-    .getElementById("countTidak")
-    .textContent =
-      tidak;
-
-  document
-    .getElementById("countTotal")
-    .textContent =
-      total;
-
-}
-
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
 
 function escapeHTML(text){
 
   const d =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   d.textContent =
     text;
@@ -1971,6 +2049,328 @@ function escapeHTML(text){
 
 }
 
+
+/* =========================================================
+   RSVP VARIABLES
+========================================================= */
+
+let hadir = 0;
+
+let tidak = 0;
+
+let total = 0;
+
+
+/* =========================================================
+   UPDATE STATISTIK
+========================================================= */
+
+function updateStats(){
+
+  document
+    .getElementById(
+      "countHadir"
+    )
+    .textContent =
+      hadir;
+
+
+  document
+    .getElementById(
+      "countTidak"
+    )
+    .textContent =
+      tidak;
+
+
+  document
+    .getElementById(
+      "countTotal"
+    )
+    .textContent =
+      total;
+
+}
+
+
+/* =========================================================
+   MENAMPILKAN UCAPAN
+========================================================= */
+
+function renderComments(data){
+
+  const list =
+    document.getElementById(
+      "commentList"
+    );
+
+
+  list.innerHTML = "";
+
+
+  if(
+    !Array.isArray(data) ||
+    data.length === 0
+  ){
+
+    list.innerHTML = `
+      <div
+        class="comment"
+        style="text-align:center;color:#999">
+
+        Belum ada ucapan.
+
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  /*
+    Data terbaru ditampilkan paling atas.
+  */
+
+  const reversed =
+    [...data].reverse();
+
+
+  reversed.forEach(item=>{
+
+    const comment =
+      document.createElement(
+        "div"
+      );
+
+    comment.className =
+      "comment";
+
+
+    const attendance =
+      String(
+        item.kehadiran || ""
+      );
+
+
+    const color =
+      attendance === "Hadir"
+        ? "#41965b"
+        : "#b85b5b";
+
+
+    const name =
+      escapeHTML(
+        String(
+          item.nama || "Tamu"
+        )
+      );
+
+
+    const message =
+      escapeHTML(
+        String(
+          item.ucapan || ""
+        )
+      );
+
+
+    const waktu =
+      escapeHTML(
+        String(
+          item.waktu || ""
+        )
+      );
+
+
+    comment.innerHTML = `
+
+      <strong>
+        ${name}
+      </strong>
+
+      <span
+        style="color:${color}">
+
+        • ${escapeHTML(attendance)}
+
+      </span>
+
+      <br>
+
+      ${message}
+
+      ${
+        waktu
+        ?
+        `<span class="comment-time">
+          ${waktu}
+        </span>`
+        :
+        ""
+      }
+
+    `;
+
+
+    list.appendChild(
+      comment
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   LOAD RSVP DARI GOOGLE SHEETS
+========================================================= */
+
+async function loadRSVP(){
+
+  if(
+    !CONFIG.googleSheetsEndpoint
+  ){
+
+    console.warn(
+      "Google Sheets endpoint belum diisi."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        CONFIG.googleSheetsEndpoint +
+        "?action=getRSVP&v=" +
+        Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "HTTP Error " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    console.log(
+      "Data RSVP:",
+      result
+    );
+
+
+    if(
+      result.status !== "success"
+    ){
+
+      throw new Error(
+        result.message ||
+        "Gagal mengambil data RSVP"
+      );
+
+    }
+
+
+    /*
+      Ambil statistik dari Google Apps Script
+    */
+
+    hadir =
+      Number(
+        result.stats?.hadir || 0
+      );
+
+
+    tidak =
+      Number(
+        result.stats?.tidakHadir || 0
+      );
+
+
+    total =
+      Number(
+        result.stats?.total || 0
+      );
+
+
+    updateStats();
+
+
+    /*
+      Tampilkan seluruh ucapan
+    */
+
+    renderComments(
+      result.data || []
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "Gagal mengambil RSVP:",
+      error
+    );
+
+
+    document
+      .getElementById(
+        "commentList"
+      )
+      .innerHTML = `
+
+        <div
+          class="comment"
+          style="text-align:center;color:#999">
+
+          Ucapan belum dapat dimuat.
+
+        </div>
+
+      `;
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD RSVP SAAT WEBSITE SIAP
+========================================================= */
+
+loadRSVP();
+
+
+/* =========================================================
+   REFRESH RSVP OTOMATIS
+   Setiap 30 detik
+========================================================= */
+
+setInterval(
+  loadRSVP,
+  30000
+);
+
+
+/* =========================================================
+   SUBMIT RSVP
+========================================================= */
 
 document
   .getElementById("rsvpForm")
@@ -1983,20 +2383,26 @@ document
 
       const name =
         document
-          .getElementById("guestName")
+          .getElementById(
+            "guestName"
+          )
           .value
           .trim();
 
 
       const attendance =
         document
-          .getElementById("attendance")
+          .getElementById(
+            "attendance"
+          )
           .value;
 
 
       const message =
         document
-          .getElementById("message")
+          .getElementById(
+            "message"
+          )
           .value
           .trim();
 
@@ -2012,122 +2418,122 @@ document
         );
 
         return;
+
       }
 
 
-      const comment =
-        document.createElement(
-          "div"
+      /*
+        Tombol dinonaktifkan sementara
+        agar tidak terkirim dua kali.
+      */
+
+      const submitButton =
+        e.target.querySelector(
+          'button[type="submit"]'
         );
 
 
-      comment.className =
-        "comment";
+      submitButton.disabled =
+        true;
+
+      submitButton.style.opacity =
+        ".6";
+
+      submitButton.textContent =
+        "Mengirim...";
 
 
-      const color =
-        attendance==="Hadir"
-        ? "#41965b"
-        : "#b85b5b";
+      try{
+
+        await fetch(
+          CONFIG.googleSheetsEndpoint,
+          {
+            method:"POST",
+            mode:"no-cors",
+            headers:{
+              "Content-Type":
+                "application/json"
+            },
+
+            body:JSON.stringify({
+
+              nama:name,
+
+              kehadiran:
+                attendance,
+
+              ucapan:
+                message,
+
+              tamuUndangan:
+                guest ||
+                CONFIG.defaultGuest,
+
+              waktu:
+                new Date()
+                  .toISOString()
+
+            })
+
+          }
+        );
 
 
-      comment.innerHTML =
-        `<strong>${escapeHTML(name)}</strong> <span style="color:${color}">• ${escapeHTML(attendance)}</span><br>${escapeHTML(message)}`;
+        /*
+          Karena POST menggunakan no-cors,
+          kita tidak membaca response POST.
 
-
-      document
-        .getElementById("commentList")
-        .prepend(comment);
-
-
-      if(
-        attendance==="Hadir"
-      ){
-
-        hadir++;
-
-      }else{
-
-        tidak++;
-
-      }
-
-
-      total++;
-
-      updateStats();
-
-
-      if(
-        CONFIG.googleSheetsEndpoint
-      ){
-
-        try{
-
-          await fetch(
-            CONFIG.googleSheetsEndpoint,
-            {
-              method:"POST",
-              mode:"no-cors",
-              headers:{
-                "Content-Type":
-                  "application/json"
-              },
-              body:JSON.stringify({
-
-                nama:name,
-
-                kehadiran:
-                  attendance,
-
-                ucapan:
-                  message,
-
-                tamuUndangan:
-                  guest ||
-                  CONFIG.defaultGuest,
-
-                waktu:
-                  new Date()
-                    .toISOString()
-
-              })
-            }
-          );
-
-
-          showToast(
-            "RSVP berhasil dikirim ✨"
-          );
-
-
-        }catch(err){
-
-          showToast(
-            "Ucapan tampil, tetapi server belum merespons"
-          );
-
-        }
-
-
-      }else{
+          Kita tunggu sebentar lalu mengambil
+          data terbaru menggunakan GET.
+        */
 
         showToast(
-          `Terima kasih ${name} ✨`
+          "RSVP berhasil dikirim ✨"
+        );
+
+
+        e.target.reset();
+
+
+        setTimeout(
+          async ()=>{
+            await loadRSVP();
+          },
+          1200
+        );
+
+
+      }catch(error){
+
+        console.error(
+          "Gagal mengirim RSVP:",
+          error
+        );
+
+
+        showToast(
+          "Gagal mengirim RSVP"
         );
 
       }
 
 
-      e.target.reset();
+      submitButton.disabled =
+        false;
+
+      submitButton.style.opacity =
+        "1";
+
+      submitButton.innerHTML =
+        "💌 Kirim Ucapan";
 
     }
   );
 
 
-/* =========================
+/* =========================================================
    CALENDAR .ICS
-========================= */
+========================================================= */
 
 document
   .querySelectorAll(
@@ -2142,6 +2548,7 @@ document
         const title =
           btn.dataset.title;
 
+
         const start =
           btn.dataset.date;
 
@@ -2150,8 +2557,10 @@ document
           start.startsWith(
             "20261010T08"
           )
-          ? "20261010T100000"
-          : "20261010T160000";
+          ?
+          "20261010T100000"
+          :
+          "20261010T160000";
 
 
         const ics = [
@@ -2216,8 +2625,10 @@ document
         a.href =
           url;
 
+
         a.download =
           "undangan-jihan-risaldi.ics";
+
 
         a.click();
 
@@ -2254,14 +2665,15 @@ function formatICS(d){
 }
 
 
-/* =========================
+/* =========================================================
    GALLERY LIGHTBOX
-========================= */
+========================================================= */
 
 const lightbox =
   document.getElementById(
     "lightbox"
   );
+
 
 const lightboxImg =
   document.getElementById(
@@ -2287,6 +2699,7 @@ document
         );
 
       }
+
     );
 
   });
@@ -2297,7 +2710,7 @@ lightbox.addEventListener(
   e=>{
 
     if(
-      e.target===lightbox ||
+      e.target === lightbox ||
       e.target.classList.contains(
         "close-lightbox"
       )
@@ -2313,11 +2726,19 @@ lightbox.addEventListener(
 );
 
 
-/* =========================
+/* =========================================================
    PARTICLES
-========================= */
+========================================================= */
 
 function createParticles(){
+
+  const sections =
+    [
+      ...document.querySelectorAll(
+        "#content section"
+      )
+    ];
+
 
   sections.forEach(
     section=>{
