@@ -36,7 +36,7 @@ html{
   padding:0;
   scroll-behavior:smooth;
 
-  /* Scroll bebas */
+  /* Scroll bebas, tidak lompat antar halaman */
   scroll-snap-type:none;
 }
 
@@ -76,6 +76,8 @@ section{
   justify-content:center;
   position:relative;
   overflow:hidden;
+
+  /* Tidak lagi snap */
   scroll-snap-align:none;
 }
 
@@ -235,6 +237,10 @@ h1,h2,h3{
     ),
     url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=90")
     center/cover;
+}
+
+.gallery{
+  background:var(--cream);
 }
 
 .gift{
@@ -649,7 +655,7 @@ h1,h2,h3{
 }
 
 .comment-list{
-  max-height:300px;
+  max-height:155px;
   overflow:auto;
   display:flex;
   flex-direction:column;
@@ -667,13 +673,6 @@ h1,h2,h3{
 
 .comment strong{
   color:#806638;
-}
-
-.comment-time{
-  display:block;
-  margin-top:5px;
-  color:#999;
-  font-size:.58rem;
 }
 
 .stats{
@@ -779,7 +778,8 @@ h1,h2,h3{
 
 
 /* =========================
-   NAVIGASI BULAT DIMATIKAN
+   NAVIGATION BULAT
+   DIMATIKAN
 ========================= */
 
 .side{
@@ -880,7 +880,8 @@ h1,h2,h3{
 
 
 /* =====================================================
-   FULL WIDTH HP
+   PERBAIKAN UTAMA UNTUK HP
+   MEMAKSA WEBSITE FULL WIDTH
 ===================================================== */
 
 html,
@@ -989,6 +990,7 @@ body{
     font-size:4.7rem;
   }
 
+  /* Tombol musik tetap berada di dalam area layar */
   .music{
     right:15px;
     bottom:15px;
@@ -1012,29 +1014,258 @@ body{
   .quote{
     max-width:100%;
   }
+}
 
-  .stats{
-    gap:6px;
+
+/* =====================================================
+   SUNFLOWER DESIGN + ANIMATION
+   Tambahan visual. Tidak mengubah sistem RSVP.
+===================================================== */
+
+:root{
+  --sun-gold:#b28a42;
+  --sun-gold-dark:#765820;
+  --sun-brown:#4e371b;
+  --sun-cream:#fffaf0;
+}
+
+#cover{
+  color:var(--sun-brown);
+  background:var(--sun-cream) !important;
+  overflow:hidden;
+  isolation:isolate;
+}
+
+#cover::before{
+  content:"";
+  position:absolute;
+  inset:-3%;
+  z-index:0;
+  background:url("frame-cover.png") center/cover no-repeat;
+  animation:coverSunBreath 16s ease-in-out infinite;
+  pointer-events:none;
+}
+
+#cover::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(rgba(255,250,235,.04),rgba(255,250,235,.09));
+  pointer-events:none;
+}
+
+#cover .cover-frame{z-index:3;border-color:rgba(118,88,32,.24)}
+#cover .cover-content{position:relative;z-index:5}
+#cover .cover-small,
+#cover .cover-arabic,
+#cover .cover-date{color:var(--sun-brown)}
+#cover .cover-title{color:var(--sun-gold-dark);text-shadow:0 3px 18px rgba(255,255,255,.85)}
+#cover .open-button{
+  color:var(--sun-gold-dark);
+  border-color:rgba(118,88,32,.55);
+  background:rgba(255,250,235,.76);
+}
+#cover .open-button:hover{background:var(--sun-gold);color:#fff}
+
+@keyframes coverSunBreath{
+  0%,100%{transform:scale(1.02) translateY(0)}
+  50%{transform:scale(1.055) translateY(-4px)}
+}
+
+.sunflower-scene{
+  --scene-bg:url("frame-quran.png");
+  --scene-overlay:rgba(255,250,235,.06);
+  position:relative;
+  isolation:isolate;
+  background:var(--sun-cream) !important;
+}
+
+.sunflower-scene::before{
+  content:"";
+  position:absolute;
+  inset:-3%;
+  z-index:0;
+  background-image:var(--scene-bg);
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  animation:sceneSunBreath 18s ease-in-out infinite;
+  pointer-events:none;
+}
+
+.sunflower-scene::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:var(--scene-overlay);
+  pointer-events:none;
+}
+
+.quran{--scene-bg:url("frame-quran.png");--scene-overlay:rgba(255,250,235,.05)}
+.couple{--scene-bg:url("frame-couple.png");--scene-overlay:rgba(255,250,235,.06)}
+.event{--scene-bg:url("frame-event.png");--scene-overlay:rgba(255,250,235,.05)}
+.gift{--scene-bg:url("frame-gift.png");--scene-overlay:rgba(255,250,235,.07)}
+.rsvp{--scene-bg:url("frame-rsvp.png");--scene-overlay:rgba(255,250,235,.08)}
+.footer{--scene-bg:url("frame-footer.png");--scene-overlay:rgba(255,247,225,.07);color:var(--dark)}
+
+@keyframes sceneSunBreath{
+  0%,100%{transform:scale(1.025) translateY(0)}
+  50%{transform:scale(1.045) translateY(-4px)}
+}
+
+.sunflower-scene .inner{position:relative;z-index:5}
+
+.scene-decor{
+  position:absolute;
+  z-index:2;
+  display:block;
+  object-fit:contain;
+  pointer-events:none;
+  user-select:none;
+  will-change:transform,opacity;
+}
+
+.decor-cover-left{
+  width:clamp(160px,28vw,330px);
+  left:-8%;bottom:-5%;
+  transform-origin:50% 100%;
+  animation:swaySunLeft 7s ease-in-out infinite;
+}
+.decor-cover-right{
+  width:clamp(135px,24vw,280px);
+  right:-5%;top:3%;
+  animation:floatSun 8s ease-in-out infinite,fadeSun 10s ease-in-out infinite;
+}
+.decor-quran{
+  width:clamp(130px,22vw,250px);
+  right:-4%;top:5%;
+  opacity:.72;
+  animation:floatSun 9s ease-in-out infinite,fadeSun 11s ease-in-out infinite;
+}
+.decor-couple-left{
+  width:clamp(130px,21vw,245px);
+  left:-6%;bottom:-3%;
+  transform-origin:50% 100%;
+  animation:swaySunLeft 6.5s ease-in-out infinite;
+}
+.decor-couple-right{
+  width:clamp(130px,21vw,245px);
+  right:-6%;bottom:-4%;
+  transform-origin:50% 100%;
+  animation:swaySunRight 7.5s ease-in-out infinite;
+}
+.decor-event{
+  width:clamp(120px,20vw,230px);
+  left:-4%;top:8%;
+  opacity:.65;
+  animation:floatSun 10s ease-in-out infinite;
+}
+.decor-gift{
+  width:clamp(130px,22vw,250px);
+  right:-4%;top:5%;
+  opacity:.78;
+  animation:floatSun 7.5s ease-in-out infinite,fadeSun 10s ease-in-out infinite;
+}
+.decor-rsvp{
+  width:clamp(130px,22vw,250px);
+  left:-5%;bottom:1%;
+  opacity:.70;
+  animation:swaySunLeft 8s ease-in-out infinite;
+}
+.decor-footer{
+  width:clamp(150px,25vw,300px);
+  right:-7%;bottom:-6%;
+  opacity:.72;
+  transform-origin:50% 100%;
+  animation:swaySunRight 8s ease-in-out infinite,fadeSun 12s ease-in-out infinite;
+}
+
+@keyframes swaySunLeft{
+  0%,100%{transform:rotate(-1.5deg)}
+  50%{transform:rotate(1.8deg)}
+}
+@keyframes swaySunRight{
+  0%,100%{transform:rotate(1.4deg)}
+  50%{transform:rotate(-1.7deg)}
+}
+@keyframes floatSun{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-9px) rotate(1deg)}
+}
+@keyframes fadeSun{
+  0%,100%{opacity:.60}
+  50%{opacity:.92}
+}
+
+.sun-petal{
+  position:absolute;
+  z-index:3;
+  width:10px;height:17px;
+  pointer-events:none;
+  border-radius:80% 10% 80% 10%;
+  background:linear-gradient(135deg,#ffd75e,#e99c15);
+  opacity:.45;
+  animation:petalSunFloat 10s ease-in-out infinite;
+}
+.sun-petal.p1{top:18%;left:9%}
+.sun-petal.p2{top:35%;right:11%;animation-delay:-3s}
+.sun-petal.p3{top:64%;left:17%;animation-delay:-6s}
+.sun-petal.p4{top:72%;right:19%;animation-delay:-8s}
+
+@keyframes petalSunFloat{
+  0%,100%{transform:translate(0,0) rotate(0);opacity:.25}
+  25%{transform:translate(7px,-12px) rotate(20deg)}
+  50%{transform:translate(13px,-4px) rotate(42deg);opacity:.75}
+  75%{transform:translate(4px,8px) rotate(18deg)}
+}
+
+.sun-soft-panel{
+  width:min(740px,100%);
+  margin:auto;
+  padding:28px 24px;
+  border-radius:26px;
+  background:rgba(255,252,244,.64);
+  border:1px solid rgba(196,157,77,.28);
+  backdrop-filter:blur(5px);
+  box-shadow:0 20px 60px rgba(89,63,18,.08);
+}
+
+.footer .arabic,
+.footer .script,
+.footer p{color:#4c4135}
+
+.card,.glass,.time,.stat,.comment{
+  background-color:rgba(255,252,244,.82);
+  border-color:rgba(191,149,64,.28);
+}
+.section-kicker,.source,.person-name,.card-title,.account{color:var(--sun-gold-dark)}
+.section-title{color:var(--sun-brown)}
+
+@media(max-width:700px){
+  .decor-cover-left{width:180px;left:-75px;opacity:.70}
+  .decor-cover-right{width:140px;right:-50px;opacity:.60}
+  .decor-quran{width:120px;right:-48px;opacity:.50}
+  .decor-couple-left,.decor-couple-right{width:125px;opacity:.55}
+  .decor-couple-left{left:-48px}
+  .decor-couple-right{right:-48px}
+  .decor-event{width:115px;left:-50px;opacity:.45}
+  .decor-gift{width:115px;right:-45px;opacity:.50}
+  .decor-rsvp{width:115px;left:-45px;opacity:.45}
+  .decor-footer{width:150px;right:-65px;opacity:.45}
+  .sun-soft-panel{padding:24px 18px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .scene-decor,.sun-petal,#cover::before,.sunflower-scene::before{
+    animation:none !important;
   }
-
-  .stat{
-    min-width:0;
-    flex:1;
-    padding:10px 5px;
-  }
-
-  .stat b{
-    font-size:1.25rem;
-  }
-
-  .stat small{
-    font-size:.48rem;
-  }
-
 }
 
 </style>
 </head>
+
 
 <body class="locked">
 
@@ -1044,6 +1275,12 @@ body{
 ========================= -->
 
 <div id="cover">
+
+  <img src="decor-sunflower-trio.png" class="scene-decor decor-cover-left" alt="" aria-hidden="true">
+  <img src="decor-sunflower-bouquet.png" class="scene-decor decor-cover-right" alt="" aria-hidden="true">
+  <span class="sun-petal p1"></span>
+  <span class="sun-petal p2"></span>
+  <span class="sun-petal p3"></span>
 
   <div class="cover-frame"></div>
 
@@ -1084,6 +1321,10 @@ body{
 </div>
 
 
+<!-- =========================
+     MAIN CONTENT
+========================= -->
+
 <main id="content">
 
 
@@ -1091,9 +1332,15 @@ body{
      QURAN
 ========================= -->
 
-<section class="quran">
+<section class="quran sunflower-scene">
+
+  <img src="decor-sunflower-bouquet.png" class="scene-decor decor-quran" alt="" aria-hidden="true">
+  <span class="sun-petal p1"></span>
+  <span class="sun-petal p3"></span>
+
 
   <div class="inner reveal">
+    <div class="sun-soft-panel">
 
     <div class="arabic" style="font-size:2.4rem">
       وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةًۗ اِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ
@@ -1114,7 +1361,7 @@ body{
     </p>
 
   </div>
-
+  </div>
 </section>
 
 
@@ -1122,7 +1369,12 @@ body{
      COUPLE
 ========================= -->
 
-<section class="couple">
+<section class="couple sunflower-scene">
+
+  <img src="decor-sunflower-left.png" class="scene-decor decor-couple-left" alt="" aria-hidden="true">
+  <img src="decor-sunflower-right.png" class="scene-decor decor-couple-right" alt="" aria-hidden="true">
+  <span class="sun-petal p2"></span>
+
 
   <div class="inner reveal">
 
@@ -1145,7 +1397,7 @@ body{
     </p>
 
     <div class="couple-grid">
-
+        
         <h2 class="person-name script">
           Jihan [Nama Lengkap]
         </h2>
@@ -1164,6 +1416,7 @@ body{
       <div class="amp script">
         &
       </div>
+
 
         <h2 class="person-name script">
           Risaldi [Nama Lengkap]
@@ -1190,7 +1443,12 @@ body{
      EVENT
 ========================= -->
 
-<section class="event">
+<section class="event sunflower-scene">
+
+  <img src="decor-sunflower-cluster.png" class="scene-decor decor-event" alt="" aria-hidden="true">
+  <span class="sun-petal p2"></span>
+  <span class="sun-petal p4"></span>
+
 
   <div class="inner reveal">
 
@@ -1201,6 +1459,7 @@ body{
     <h2 class="section-title">
       Rangkaian Acara
     </h2>
+
 
     <div class="countdown">
 
@@ -1229,6 +1488,7 @@ body{
 
     <div class="cards">
 
+
       <div class="card">
 
         <div class="icon">
@@ -1255,10 +1515,7 @@ body{
           [Alamat Lengkap]
         </p>
 
-        <a
-          href="https://maps.google.com"
-          target="_blank"
-          class="btn">
+        <a href="https://maps.google.com" target="_blank" class="btn">
           📍 Buka Maps
         </a>
 
@@ -1298,10 +1555,7 @@ body{
           [Alamat Lengkap]
         </p>
 
-        <a
-          href="https://maps.google.com"
-          target="_blank"
-          class="btn">
+        <a href="https://maps.google.com" target="_blank" class="btn">
           📍 Buka Maps
         </a>
 
@@ -1325,7 +1579,12 @@ body{
      GIFT
 ========================= -->
 
-<section class="gift">
+<section class="gift sunflower-scene">
+
+  <img src="decor-sunflower-bouquet.png" class="scene-decor decor-gift" alt="" aria-hidden="true">
+  <span class="sun-petal p1"></span>
+  <span class="sun-petal p4"></span>
+
 
   <div class="inner reveal">
 
@@ -1359,9 +1618,7 @@ body{
           a.n. [Nama Pemilik Rekening]
         </p>
 
-        <button
-          class="btn"
-          onclick="copyAccount()">
+        <button class="btn" onclick="copyAccount()">
           📋 Salin Rekening
         </button>
 
@@ -1382,7 +1639,12 @@ body{
      RSVP
 ========================= -->
 
-<section class="rsvp">
+<section class="rsvp sunflower-scene">
+
+  <img src="decor-sunflower-cluster.png" class="scene-decor decor-rsvp" alt="" aria-hidden="true">
+  <span class="sun-petal p2"></span>
+  <span class="sun-petal p3"></span>
+
 
   <div class="inner reveal">
 
@@ -1396,8 +1658,6 @@ body{
         Kami memohon untuk mengirimkan doa terbaik untuk kami.
       </p>
 
-
-      <!-- STATISTIK DARI GOOGLE SHEETS -->
 
       <div class="stats">
 
@@ -1419,26 +1679,19 @@ body{
       </div>
 
 
-      <!-- FORM RSVP -->
-
       <form id="rsvpForm">
 
         <div class="form-group">
-
           <input
             id="guestName"
             type="text"
             placeholder="Nama Anda"
             required>
-
         </div>
-
 
         <div class="form-group">
 
-          <select
-            id="attendance"
-            required>
+          <select id="attendance" required>
 
             <option value="">
               Pilih Kehadiran
@@ -1456,7 +1709,6 @@ body{
 
         </div>
 
-
         <div class="form-group">
 
           <textarea
@@ -1467,20 +1719,15 @@ body{
 
         </div>
 
-
         <button
           class="btn"
           style="width:100%"
           type="submit">
-
           💌 Kirim Ucapan
-
         </button>
 
       </form>
 
-
-      <!-- DAFTAR UCAPAN -->
 
       <div class="comments">
 
@@ -1488,20 +1735,12 @@ body{
           Ucapan dari tamu
         </p>
 
-
-        <div
-          id="commentList"
-          class="comment-list">
-
-          <div
-            class="comment"
-            style="text-align:center;color:#999">
-
+        <div id="commentList" class="comment-list">
+          <div class="comment" style="text-align:center;color:#999">
             Memuat ucapan...
-
           </div>
-
         </div>
+      </div>
 
       </div>
 
@@ -1516,9 +1755,15 @@ body{
      FOOTER
 ========================= -->
 
-<section class="footer">
+<section class="footer sunflower-scene">
+
+  <img src="decor-sunflower-trio.png" class="scene-decor decor-footer" alt="" aria-hidden="true">
+  <span class="sun-petal p1"></span>
+  <span class="sun-petal p3"></span>
+
 
   <div class="inner reveal">
+    <div class="sun-soft-panel">
 
     <p>
       Kesan mendalam akan terukir di hati kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kami.
@@ -1550,9 +1795,7 @@ body{
       Kami yang berbahagia,
     </p>
 
-    <div
-      class="script"
-      style="font-size:4rem">
+    <div class="script" style="font-size:4rem">
       Jihan & Risaldi
     </div>
 
@@ -1563,7 +1806,7 @@ body{
     </p>
 
   </div>
-
+  </div>
 </section>
 
 
@@ -1574,15 +1817,8 @@ body{
      AUDIO
 ========================= -->
 
-<audio
-  id="music"
-  loop
-  preload="auto">
-
-  <source
-    src="lagu-pernikahan.mp3"
-    type="audio/mpeg">
-
+<audio id="music" loop preload="auto">
+  <source src="lagu-pernikahan.mp3" type="audio/mpeg">
 </audio>
 
 
@@ -1601,13 +1837,10 @@ body{
 </button>
 
 
-<!-- =========================
-     LIGHTBOX
-========================= -->
+<!-- NAVIGASI BULAT DIHILANGKAN -->
 
-<div
-  id="lightbox"
-  class="lightbox">
+
+<div id="lightbox" class="lightbox">
 
   <div class="close-lightbox">
     ×
@@ -1620,18 +1853,14 @@ body{
 </div>
 
 
-<div
-  id="toast"
-  class="toast">
-</div>
+<div id="toast" class="toast"></div>
 
 
 <script>
 
-
-/* =========================================================
+/* =========================
    KONFIGURASI
-========================================================= */
+========================= */
 
 const CONFIG = {
 
@@ -1639,8 +1868,9 @@ const CONFIG = {
     "2026-10-10T08:00:00+08:00",
 
   /*
-   URL GOOGLE APPS SCRIPT WEB APP
-   YANG SUDAH ANDA TEST DAN BERHASIL
+   OPSIONAL:
+   Tempel URL Google Apps Script Web App Anda di bawah.
+   Jika kosong, RSVP tetap tampil lokal di browser.
   */
 
   googleSheetsEndpoint:
@@ -1652,9 +1882,11 @@ const CONFIG = {
 };
 
 
-/* =========================================================
+/* =========================
    PERSONALIZED GUEST
-========================================================= */
+   Contoh:
+   index.html?to=Ahmad%20Fauzi
+========================= */
 
 const params =
   new URLSearchParams(location.search);
@@ -1666,22 +1898,19 @@ const guest =
 if(guest){
 
   const greeting =
-    document.getElementById(
-      "guestGreeting"
-    );
+    document.getElementById("guestGreeting");
 
   greeting.textContent =
     "Kepada Yth. " + guest;
 
   greeting.style.display =
     "block";
-
 }
 
 
-/* =========================================================
-   OPEN COVER
-========================================================= */
+/* =========================
+   OPEN
+========================= */
 
 const cover =
   document.getElementById("cover");
@@ -1699,82 +1928,63 @@ const musicButton =
   document.getElementById("musicButton");
 
 
-openButton.addEventListener(
-  "click",
-  ()=>{
+openButton.addEventListener("click",()=>{
 
-    document.body.classList.remove(
-      "locked"
-    );
+  document.body.classList.remove("locked");
 
-    content.style.display =
-      "block";
+  content.style.display =
+    "block";
 
-    cover.classList.add(
-      "opened"
-    );
+  cover.classList.add("opened");
 
-    musicButton.style.display =
-      "block";
+  musicButton.style.display =
+    "block";
 
+  music.play()
+    .then(()=>{
+      musicButton.classList.add("playing");
+    })
+    .catch(()=>{});
 
-    music.play()
-      .then(()=>{
+  setTimeout(()=>{
+    cover.remove();
+  },1100);
 
-        musicButton.classList.add(
-          "playing"
-        );
+  createParticles();
 
-      })
-      .catch(()=>{});
+});
 
 
-    setTimeout(()=>{
-
-      cover.remove();
-
-    },1100);
-
-
-    createParticles();
-
-  }
-);
-
-
-/* =========================================================
+/* =========================
    MUSIC
-========================================================= */
+========================= */
 
-musicButton.addEventListener(
-  "click",
-  ()=>{
+musicButton.addEventListener("click",()=>{
 
-    if(music.paused){
+  if(music.paused){
 
-      music.play();
+    music.play();
 
-      musicButton.classList.add(
-        "playing"
-      );
+    musicButton.classList.add(
+      "playing"
+    );
 
-    }else{
+  }else{
 
-      music.pause();
+    music.pause();
 
-      musicButton.classList.remove(
-        "playing"
-      );
-
-    }
+    musicButton.classList.remove(
+      "playing"
+    );
 
   }
-);
+
+});
 
 
-/* =========================================================
-   REVEAL ANIMATION
-========================================================= */
+/* =========================
+   REVEAL
+========================= */
 
 const revealObserver =
   new IntersectionObserver(
@@ -1802,15 +2012,24 @@ const revealObserver =
 document
   .querySelectorAll(".reveal")
   .forEach(el=>{
-
     revealObserver.observe(el);
-
   });
 
 
-/* =========================================================
+/* =========================
+   SECTION NAVIGATION
+   BULATAN SUDAH DIHILANGKAN
+========================= */
+
+const sections =
+  [...document.querySelectorAll(
+    "#content section"
+  )];
+
+
+/* =========================
    TOP BUTTON
-========================================================= */
+========================= */
 
 const topButton =
   document.getElementById(
@@ -1835,24 +2054,20 @@ window.addEventListener(
 topButton.addEventListener(
   "click",
   ()=>{
-
     window.scrollTo({
       top:0,
       behavior:"smooth"
     });
-
   }
 );
 
 
-/* =========================================================
+/* =========================
    COUNTDOWN
-========================================================= */
+========================= */
 
 const target =
-  new Date(
-    CONFIG.weddingDate
-  );
+  new Date(CONFIG.weddingDate);
 
 
 function updateCountdown(){
@@ -1877,57 +2092,41 @@ function updateCountdown(){
     });
 
     return;
-
   }
 
 
   const days =
-    Math.floor(
-      d/86400000
-    );
+    Math.floor(d/86400000);
 
   const hours =
-    Math.floor(
-      d/3600000
-    )%24;
+    Math.floor(d/3600000)%24;
 
   const minutes =
-    Math.floor(
-      d/60000
-    )%60;
+    Math.floor(d/60000)%60;
 
   const seconds =
-    Math.floor(
-      d/1000
-    )%60;
+    Math.floor(d/1000)%60;
 
 
   document
     .getElementById("days")
     .textContent =
-      String(days)
-      .padStart(2,"0");
-
+      String(days).padStart(2,"0");
 
   document
     .getElementById("hours")
     .textContent =
-      String(hours)
-      .padStart(2,"0");
-
+      String(hours).padStart(2,"0");
 
   document
     .getElementById("minutes")
     .textContent =
-      String(minutes)
-      .padStart(2,"0");
-
+      String(minutes).padStart(2,"0");
 
   document
     .getElementById("seconds")
     .textContent =
-      String(seconds)
-      .padStart(2,"0");
+      String(seconds).padStart(2,"0");
 
 }
 
@@ -1940,9 +2139,9 @@ setInterval(
 );
 
 
-/* =========================================================
-   TOAST
-========================================================= */
+/* =========================
+   COPY REKENING
+========================= */
 
 function showToast(msg){
 
@@ -1958,30 +2157,22 @@ function showToast(msg){
     "show"
   );
 
-
   clearTimeout(
     window.toastTimer
   );
 
-
   window.toastTimer =
     setTimeout(
       ()=>{
-
         t.classList.remove(
           "show"
         );
-
       },
       2400
     );
 
 }
 
-
-/* =========================================================
-   COPY REKENING
-========================================================= */
 
 function copyAccount(){
 
@@ -1997,239 +2188,134 @@ function copyAccount(){
   navigator.clipboard
     .writeText(n)
     .then(()=>{
-
       showToast(
         "Nomor rekening berhasil disalin ✨"
       );
-
     })
     .catch(()=>{
-
       showToast(
         "Gagal menyalin nomor rekening"
       );
-
     });
 
 }
 
 
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(text){
-
-  const d =
-    document.createElement(
-      "div"
-    );
-
-  d.textContent =
-    text;
-
-  return d.innerHTML;
-
-}
-
-
-/* =========================================================
-   RSVP VARIABLES
-========================================================= */
+/* =========================
+   RSVP ONLINE: GOOGLE SHEETS
+========================= */
 
 let hadir = 0;
-
 let tidak = 0;
-
 let total = 0;
-
-
-/* =========================================================
-   UPDATE STATISTIK
-========================================================= */
 
 function updateStats(){
 
   document
-    .getElementById(
-      "countHadir"
-    )
-    .textContent =
-      hadir;
-
+    .getElementById("countHadir")
+    .textContent = hadir;
 
   document
-    .getElementById(
-      "countTidak"
-    )
-    .textContent =
-      tidak;
-
+    .getElementById("countTidak")
+    .textContent = tidak;
 
   document
-    .getElementById(
-      "countTotal"
-    )
-    .textContent =
-      total;
-
+    .getElementById("countTotal")
+    .textContent = total;
 }
 
+function escapeHTML(text){
 
-/* =========================================================
-   MENAMPILKAN UCAPAN
-========================================================= */
+  const d =
+    document.createElement("div");
+
+  d.textContent =
+    String(text ?? "");
+
+  return d.innerHTML;
+}
 
 function renderComments(data){
 
   const list =
-    document.getElementById(
-      "commentList"
-    );
-
+    document.getElementById("commentList");
 
   list.innerHTML = "";
-
 
   if(
     !Array.isArray(data) ||
     data.length === 0
   ){
-
     list.innerHTML = `
-      <div
-        class="comment"
-        style="text-align:center;color:#999">
-
+      <div class="comment" style="text-align:center;color:#999">
         Belum ada ucapan.
-
       </div>
     `;
-
     return;
-
   }
 
-
   /*
-    Data terbaru ditampilkan paling atas.
+    Apps Script membaca baris lama → baru.
+    Tampilkan yang terbaru paling atas.
   */
-
-  const reversed =
+  const newestFirst =
     [...data].reverse();
 
-
-  reversed.forEach(item=>{
+  newestFirst.forEach(item=>{
 
     const comment =
-      document.createElement(
-        "div"
-      );
+      document.createElement("div");
 
     comment.className =
       "comment";
 
-
     const attendance =
-      String(
-        item.kehadiran || ""
-      );
+      String(item.kehadiran || "");
 
-
-    const color =
+    const statusColor =
       attendance === "Hadir"
-        ? "#41965b"
-        : "#b85b5b";
-
+      ? "#41864f"
+      : "#b45d52";
 
     const name =
-      escapeHTML(
-        String(
-          item.nama || "Tamu"
-        )
-      );
-
+      escapeHTML(item.nama || "Tamu");
 
     const message =
-      escapeHTML(
-        String(
-          item.ucapan || ""
-        )
-      );
+      escapeHTML(item.ucapan || "");
 
-
-    const waktu =
-      escapeHTML(
-        String(
-          item.waktu || ""
-        )
-      );
-
+    const time =
+      escapeHTML(item.waktu || "");
 
     comment.innerHTML = `
-
-      <strong>
-        ${name}
-      </strong>
-
-      <span
-        style="color:${color}">
-
+      <strong>${name}</strong>
+      <span style="color:${statusColor}">
         • ${escapeHTML(attendance)}
-
       </span>
-
       <br>
-
       ${message}
-
       ${
-        waktu
-        ?
-        `<span class="comment-time">
-          ${waktu}
-        </span>`
-        :
-        ""
+        time
+        ? `<span style="display:block;margin-top:5px;font-size:.56rem;color:#999">${time}</span>`
+        : ""
       }
-
     `;
 
-
-    list.appendChild(
-      comment
-    );
-
+    list.appendChild(comment);
   });
-
 }
-
-
-/* =========================================================
-   LOAD RSVP DARI GOOGLE SHEETS
-========================================================= */
 
 async function loadRSVP(){
 
-  if(
-    !CONFIG.googleSheetsEndpoint
-  ){
-
-    console.warn(
-      "Google Sheets endpoint belum diisi."
-    );
-
+  if(!CONFIG.googleSheetsEndpoint){
     return;
-
   }
-
 
   try{
 
     const response =
       await fetch(
         CONFIG.googleSheetsEndpoint +
-        "?action=getRSVP&v=" +
+        "?v=" +
         Date.now(),
         {
           method:"GET",
@@ -2237,72 +2323,42 @@ async function loadRSVP(){
         }
       );
 
-
     if(!response.ok){
-
       throw new Error(
-        "HTTP Error " +
-        response.status
+        "HTTP " + response.status
       );
-
     }
-
 
     const result =
       await response.json();
 
-
-    console.log(
-      "Data RSVP:",
-      result
-    );
-
-
-    if(
-      result.status !== "success"
-    ){
-
+    if(result.status !== "success"){
       throw new Error(
         result.message ||
         "Gagal mengambil data RSVP"
       );
-
     }
-
-
-    /*
-      Ambil statistik dari Google Apps Script
-    */
 
     hadir =
       Number(
         result.stats?.hadir || 0
       );
 
-
     tidak =
       Number(
         result.stats?.tidakHadir || 0
       );
-
 
     total =
       Number(
         result.stats?.total || 0
       );
 
-
     updateStats();
-
-
-    /*
-      Tampilkan seluruh ucapan
-    */
 
     renderComments(
       result.data || []
     );
-
 
   }catch(error){
 
@@ -2311,49 +2367,15 @@ async function loadRSVP(){
       error
     );
 
-
     document
-      .getElementById(
-        "commentList"
-      )
+      .getElementById("commentList")
       .innerHTML = `
-
-        <div
-          class="comment"
-          style="text-align:center;color:#999">
-
+        <div class="comment" style="text-align:center;color:#999">
           Ucapan belum dapat dimuat.
-
         </div>
-
       `;
-
   }
-
 }
-
-
-/* =========================================================
-   LOAD RSVP SAAT WEBSITE SIAP
-========================================================= */
-
-loadRSVP();
-
-
-/* =========================================================
-   REFRESH RSVP OTOMATIS
-   Setiap 30 detik
-========================================================= */
-
-setInterval(
-  loadRSVP,
-  30000
-);
-
-
-/* =========================================================
-   SUBMIT RSVP
-========================================================= */
 
 document
   .getElementById("rsvpForm")
@@ -2363,68 +2385,42 @@ document
 
       e.preventDefault();
 
-
       const name =
         document
-          .getElementById(
-            "guestName"
-          )
+          .getElementById("guestName")
           .value
           .trim();
-
 
       const attendance =
         document
-          .getElementById(
-            "attendance"
-          )
+          .getElementById("attendance")
           .value;
-
 
       const message =
         document
-          .getElementById(
-            "message"
-          )
+          .getElementById("message")
           .value
           .trim();
-
 
       if(
         !name ||
         !attendance ||
         !message
       ){
-
         showToast(
           "Mohon lengkapi data terlebih dahulu"
         );
-
         return;
-
       }
-
-
-      /*
-        Tombol dinonaktifkan sementara
-        agar tidak terkirim dua kali.
-      */
 
       const submitButton =
         e.target.querySelector(
           'button[type="submit"]'
         );
 
-
-      submitButton.disabled =
-        true;
-
-      submitButton.style.opacity =
-        ".6";
-
-      submitButton.textContent =
-        "Mengirim...";
-
+      submitButton.disabled = true;
+      submitButton.style.opacity = ".6";
+      submitButton.textContent = "Mengirim...";
 
       try{
 
@@ -2437,54 +2433,30 @@ document
               "Content-Type":
                 "application/json"
             },
-
             body:JSON.stringify({
-
               nama:name,
-
-              kehadiran:
-                attendance,
-
-              ucapan:
-                message,
-
+              kehadiran:attendance,
+              ucapan:message,
               tamuUndangan:
                 guest ||
                 CONFIG.defaultGuest,
-
               waktu:
                 new Date()
-                  .toISOString()
-
+                .toISOString()
             })
-
           }
         );
-
-
-        /*
-          Karena POST menggunakan no-cors,
-          kita tidak membaca response POST.
-
-          Kita tunggu sebentar lalu mengambil
-          data terbaru menggunakan GET.
-        */
 
         showToast(
           "RSVP berhasil dikirim ✨"
         );
 
-
         e.target.reset();
 
-
         setTimeout(
-          async ()=>{
-            await loadRSVP();
-          },
-          1200
+          loadRSVP,
+          1400
         );
-
 
       }catch(error){
 
@@ -2493,30 +2465,31 @@ document
           error
         );
 
-
         showToast(
           "Gagal mengirim RSVP"
         );
 
+      }finally{
+
+        submitButton.disabled = false;
+        submitButton.style.opacity = "1";
+        submitButton.innerHTML =
+          "💌 Kirim Ucapan";
       }
-
-
-      submitButton.disabled =
-        false;
-
-      submitButton.style.opacity =
-        "1";
-
-      submitButton.innerHTML =
-        "💌 Kirim Ucapan";
-
     }
   );
 
+loadRSVP();
 
-/* =========================================================
+setInterval(
+  loadRSVP,
+  30000
+);
+
+
+/* =========================
    CALENDAR .ICS
-========================================================= */
+========================= */
 
 document
   .querySelectorAll(
@@ -2531,7 +2504,6 @@ document
         const title =
           btn.dataset.title;
 
-
         const start =
           btn.dataset.date;
 
@@ -2540,10 +2512,8 @@ document
           start.startsWith(
             "20261010T08"
           )
-          ?
-          "20261010T100000"
-          :
-          "20261010T160000";
+          ? "20261010T100000"
+          : "20261010T160000";
 
 
         const ics = [
@@ -2608,10 +2578,8 @@ document
         a.href =
           url;
 
-
         a.download =
           "undangan-jihan-risaldi.ics";
-
 
         a.click();
 
@@ -2648,15 +2616,14 @@ function formatICS(d){
 }
 
 
-/* =========================================================
+/* =========================
    GALLERY LIGHTBOX
-========================================================= */
+========================= */
 
 const lightbox =
   document.getElementById(
     "lightbox"
   );
-
 
 const lightboxImg =
   document.getElementById(
@@ -2682,7 +2649,6 @@ document
         );
 
       }
-
     );
 
   });
@@ -2693,7 +2659,7 @@ lightbox.addEventListener(
   e=>{
 
     if(
-      e.target === lightbox ||
+      e.target===lightbox ||
       e.target.classList.contains(
         "close-lightbox"
       )
@@ -2709,68 +2675,42 @@ lightbox.addEventListener(
 );
 
 
-/* =========================================================
+/* =========================
    PARTICLES
-========================================================= */
+========================= */
+
+let particlesCreated = false;
 
 function createParticles(){
 
-  const sections =
-    [
-      ...document.querySelectorAll(
-        "#content section"
-      )
-    ];
+  if(particlesCreated){
+    return;
+  }
 
+  particlesCreated = true;
 
-  sections.forEach(
-    section=>{
+  sections.forEach(section=>{
 
-      for(
-        let i=0;
-        i<5;
-        i++
-      ){
+    for(let i=0;i<4;i++){
 
-        const p =
-          document.createElement(
-            "span"
-          );
+      const p =
+        document.createElement("span");
 
+      p.className =
+        "particle";
 
-        p.className =
-          "particle";
+      p.style.left =
+        Math.random()*100 + "%";
 
+      p.style.animationDuration =
+        (10 + Math.random()*12) + "s";
 
-        p.style.left =
-          Math.random()*100 +
-          "%";
+      p.style.animationDelay =
+        (Math.random()*8) + "s";
 
-
-        p.style.animationDuration =
-          (
-            8 +
-            Math.random()*12
-          ) +
-          "s";
-
-
-        p.style.animationDelay =
-          (
-            Math.random()*8
-          ) +
-          "s";
-
-
-        section.appendChild(
-          p
-        );
-
-      }
-
+      section.appendChild(p);
     }
-  );
-
+  });
 }
 
 </script>
