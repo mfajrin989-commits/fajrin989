@@ -1257,358 +1257,8 @@ body{
   .sun-soft-panel{padding:24px 18px}
 }
 
-
-/* =====================================================
-   ALL DECOR ASSETS — FAST ELEGANT MOTION
-===================================================== */
-
-/* Faster scene breathing so the invitation visibly feels alive */
-#cover::before{
-  animation-duration:11s !important;
-}
-
-.sunflower-scene::before{
-  animation-duration:12s !important;
-}
-
-/* Existing flowers: faster than the previous design */
-.decor-cover-left{
-  animation:swaySunLeft 4.4s ease-in-out infinite !important;
-}
-.decor-cover-right{
-  animation:floatSun 4.2s ease-in-out infinite,fadeSun 5.6s ease-in-out infinite !important;
-}
-.decor-quran{
-  animation:floatSun 4.5s ease-in-out infinite,fadeSun 5.8s ease-in-out infinite !important;
-}
-.decor-couple-left{
-  animation:swaySunLeft 3.8s ease-in-out infinite !important;
-}
-.decor-couple-right{
-  animation:swaySunRight 4.2s ease-in-out infinite !important;
-}
-.decor-event{
-  animation:floatSun 4.4s ease-in-out infinite,fadeSun 6s ease-in-out infinite !important;
-}
-.decor-gift{
-  animation:floatSun 3.9s ease-in-out infinite,fadeSun 5.4s ease-in-out infinite !important;
-}
-.decor-rsvp{
-  animation:swaySunLeft 4.1s ease-in-out infinite,fadeSun 6s ease-in-out infinite !important;
-}
-.decor-footer{
-  animation:swaySunRight 4s ease-in-out infinite,fadeSun 5.8s ease-in-out infinite !important;
-}
-
-/* Divider from asset pack */
-.decor-divider-img{
-  display:block;
-  width:clamp(150px,30vw,270px);
-  max-height:42px;
-  object-fit:contain;
-  margin:14px auto 24px;
-  position:relative;
-  z-index:6;
-  animation:dividerGlow 3.2s ease-in-out infinite;
-}
-
-/* Gold ornaments */
-.ornament-floating{
-  position:absolute;
-  z-index:3;
-  width:clamp(170px,30vw,360px);
-  pointer-events:none;
-  user-select:none;
-  object-fit:contain;
-  animation:ornamentFloat 4.4s ease-in-out infinite, ornamentFade 5.5s ease-in-out infinite;
-}
-
-.ornament-top-cover{
-  top:4%;
-  left:50%;
-  transform:translateX(-50%);
-  width:clamp(180px,32vw,390px);
-}
-.ornament-quran{
-  left:50%;
-  top:2.5%;
-  transform:translateX(-50%);
-  opacity:.68;
-}
-.ornament-couple{
-  left:50%;
-  bottom:1%;
-  transform:translateX(-50%);
-  opacity:.50;
-}
-.ornament-event{
-  left:50%;
-  bottom:1.5%;
-  transform:translateX(-50%);
-  opacity:.60;
-}
-.ornament-gift{
-  left:50%;
-  bottom:2%;
-  transform:translateX(-50%);
-  opacity:.62;
-}
-.ornament-rsvp{
-  left:50%;
-  top:1%;
-  transform:translateX(-50%);
-  opacity:.58;
-}
-.ornament-footer-top{
-  left:50%;
-  top:2%;
-  transform:translateX(-50%);
-  opacity:.72;
-}
-.ornament-footer-bottom{
-  left:50%;
-  bottom:1.5%;
-  transform:translateX(-50%);
-  opacity:.65;
-}
-
-/* Leaves */
-.leaf-branch{
-  position:absolute;
-  z-index:2;
-  width:clamp(100px,17vw,210px);
-  pointer-events:none;
-  user-select:none;
-  transform-origin:50% 100%;
-  animation:leafBranchSway 3.7s ease-in-out infinite;
-}
-.leaf-drift{
-  position:absolute;
-  z-index:3;
-  width:clamp(45px,7vw,86px);
-  pointer-events:none;
-  user-select:none;
-  animation:leafDrift 4.5s ease-in-out infinite;
-}
-.leaf-drift.reverse{
-  animation-name:leafDriftReverse;
-}
-
-.quran-leaf-branch{left:-3%;bottom:5%;opacity:.65}
-.event-leaf-branch{right:-2%;bottom:4%;opacity:.62}
-.gift-leaf-branch{left:-3%;bottom:5%;opacity:.68}
-.footer-leaf-branch{left:-2%;bottom:8%;opacity:.56}
-
-.cover-leaf-a{left:8%;top:20%;animation-delay:-1.1s}
-.cover-leaf-b{right:7%;bottom:30%;animation-delay:-2.4s}
-.quran-leaf-a{left:11%;top:22%;animation-delay:-.8s}
-.quran-leaf-b{right:8%;bottom:25%;animation-delay:-2.2s}
-.couple-leaf-a{left:8%;top:16%;animation-delay:-1.2s}
-.couple-leaf-b{right:9%;top:25%;animation-delay:-2.5s}
-.event-leaf-a{left:12%;bottom:26%;animation-delay:-.9s}
-.event-leaf-b{right:10%;top:24%;animation-delay:-2.0s}
-.gift-leaf-a{left:9%;top:21%;animation-delay:-1.3s}
-.rsvp-leaf-a{right:10%;top:23%;animation-delay:-1.6s}
-.footer-leaf-a{left:10%;top:22%;animation-delay:-1.0s}
-
-/* Petal image groups */
-.petal-img{
-  position:absolute;
-  z-index:3;
-  width:clamp(70px,10vw,125px);
-  pointer-events:none;
-  user-select:none;
-  object-fit:contain;
-  opacity:.68;
-  animation:petalImageFloat 4.9s ease-in-out infinite;
-}
-.petal-fast{
-  animation-duration:3.8s;
-}
-.cover-petals{left:12%;top:44%}
-.quran-petals{right:11%;top:34%;animation-delay:-1.4s}
-.event-petals{left:14%;top:34%;animation-delay:-2.0s}
-.gift-petals{right:13%;bottom:30%;animation-delay:-.8s}
-.rsvp-petals{left:14%;top:37%;animation-delay:-1.8s}
-.footer-petals{right:13%;top:35%;animation-delay:-2.3s}
-
-/* Small yellow flowers */
-.small-flowers{
-  position:absolute;
-  z-index:2;
-  width:clamp(90px,14vw,170px);
-  pointer-events:none;
-  user-select:none;
-  transform-origin:50% 100%;
-  animation:smallFlowersSway 3.6s ease-in-out infinite, fadeSun 5.2s ease-in-out infinite;
-}
-.quran-small-flowers{left:4%;bottom:4%;opacity:.62}
-.event-small-flowers{right:3%;bottom:3%;opacity:.62}
-.rsvp-small-flowers{left:3%;top:7%;opacity:.58}
-.footer-small-flowers{right:4%;top:8%;opacity:.52}
-
-/* Sun */
-.decor-sun-fast{
-  position:absolute;
-  z-index:2;
-  width:clamp(70px,10vw,125px);
-  pointer-events:none;
-  user-select:none;
-  opacity:.55;
-  animation:sunPulseRotate 8s linear infinite;
-}
-.cover-sun{right:9%;top:13%}
-.event-sun{right:7%;top:8%;opacity:.40}
-.footer-sun{left:8%;top:8%;opacity:.45}
-
-/* Butterfly */
-.butterfly{
-  position:absolute;
-  z-index:4;
-  width:clamp(45px,7vw,85px);
-  pointer-events:none;
-  user-select:none;
-  filter:drop-shadow(0 7px 12px rgba(88,55,10,.12));
-}
-.butterfly-cover{
-  top:20%;
-  left:22%;
-  animation:butterflyFlightA 7s ease-in-out infinite, butterflyWiggle 1.2s ease-in-out infinite;
-}
-.butterfly-quran{
-  top:15%;
-  right:18%;
-  width:clamp(38px,6vw,70px);
-  animation:butterflyFlightB 6.5s ease-in-out infinite, butterflyWiggle 1.1s ease-in-out infinite;
-}
-.butterfly-gift{
-  top:18%;
-  left:15%;
-  width:clamp(40px,6vw,75px);
-  animation:butterflyFlightA 6.8s ease-in-out infinite, butterflyWiggle 1.15s ease-in-out infinite;
-}
-.butterfly-footer{
-  top:18%;
-  right:16%;
-  width:clamp(42px,6vw,78px);
-  animation:butterflyFlightB 7.2s ease-in-out infinite, butterflyWiggle 1.2s ease-in-out infinite;
-}
-
-/* Sparkles */
-.sparkle{
-  position:absolute;
-  z-index:3;
-  width:clamp(70px,10vw,135px);
-  pointer-events:none;
-  user-select:none;
-  object-fit:contain;
-  mix-blend-mode:screen;
-  animation:sparkleTwinkle 2.6s ease-in-out infinite;
-}
-.sparkle-cover{right:4%;bottom:21%}
-.sparkle-quran{left:5%;top:13%;animation-delay:-.8s}
-.sparkle-couple{right:6%;top:10%;animation-delay:-1.5s}
-.sparkle-event{left:5%;bottom:18%;animation-delay:-.5s}
-.sparkle-gift{right:5%;bottom:15%;animation-delay:-1.2s}
-.sparkle-rsvp{right:5%;bottom:16%;animation-delay:-1.7s}
-.sparkle-footer{left:5%;bottom:18%;animation-delay:-.9s}
-
-/* Make the CSS petals visibly faster too */
-.sun-petal{
-  animation-duration:5.2s !important;
-}
-.sun-petal.p2{animation-delay:-1.2s !important}
-.sun-petal.p3{animation-delay:-2.6s !important}
-.sun-petal.p4{animation-delay:-3.8s !important}
-
-/* Extra animation keyframes */
-@keyframes ornamentFloat{
-  0%,100%{transform:translateX(-50%) translateY(0) scale(1)}
-  50%{transform:translateX(-50%) translateY(-7px) scale(1.015)}
-}
-@keyframes ornamentFade{
-  0%,100%{opacity:.48}
-  50%{opacity:.78}
-}
-@keyframes dividerGlow{
-  0%,100%{opacity:.68;transform:scale(.985)}
-  50%{opacity:1;transform:scale(1.01)}
-}
-@keyframes leafBranchSway{
-  0%,100%{transform:rotate(-2deg)}
-  50%{transform:rotate(2.6deg)}
-}
-@keyframes leafDrift{
-  0%,100%{transform:translate(0,0) rotate(-8deg);opacity:.38}
-  35%{transform:translate(10px,-12px) rotate(12deg);opacity:.75}
-  70%{transform:translate(18px,6px) rotate(26deg);opacity:.56}
-}
-@keyframes leafDriftReverse{
-  0%,100%{transform:translate(0,0) rotate(10deg);opacity:.40}
-  35%{transform:translate(-10px,-10px) rotate(-10deg);opacity:.76}
-  70%{transform:translate(-18px,7px) rotate(-24deg);opacity:.58}
-}
-@keyframes petalImageFloat{
-  0%,100%{transform:translate(0,0) rotate(-4deg);opacity:.38}
-  30%{transform:translate(14px,-14px) rotate(12deg);opacity:.80}
-  65%{transform:translate(25px,4px) rotate(26deg);opacity:.58}
-}
-@keyframes smallFlowersSway{
-  0%,100%{transform:rotate(-1.8deg) translateY(0)}
-  50%{transform:rotate(2.2deg) translateY(-5px)}
-}
-@keyframes sunPulseRotate{
-  0%{transform:rotate(0deg) scale(.96);opacity:.38}
-  50%{transform:rotate(180deg) scale(1.06);opacity:.65}
-  100%{transform:rotate(360deg) scale(.96);opacity:.38}
-}
-@keyframes butterflyFlightA{
-  0%,100%{transform:translate(0,0) rotate(-5deg)}
-  30%{transform:translate(28px,-18px) rotate(7deg)}
-  65%{transform:translate(54px,12px) rotate(-4deg)}
-}
-@keyframes butterflyFlightB{
-  0%,100%{transform:translate(0,0) rotate(6deg)}
-  30%{transform:translate(-24px,-14px) rotate(-7deg)}
-  65%{transform:translate(-48px,14px) rotate(4deg)}
-}
-@keyframes butterflyWiggle{
-  0%,100%{filter:drop-shadow(0 7px 12px rgba(88,55,10,.12)) brightness(1)}
-  50%{filter:drop-shadow(0 9px 16px rgba(88,55,10,.18)) brightness(1.08)}
-}
-@keyframes sparkleTwinkle{
-  0%,100%{opacity:.18;transform:scale(.88) rotate(-3deg)}
-  50%{opacity:.82;transform:scale(1.07) rotate(3deg)}
-}
-
-/* A little more movement in cards without becoming distracting */
-.card,.glass,.photo,.time,.stat{
-  transition:transform .35s ease, box-shadow .35s ease;
-}
-.card:hover,.glass:hover{
-  transform:translateY(-5px);
-}
-
-/* Mobile: keep animation visible while protecting readability */
-@media(max-width:700px){
-  .ornament-floating{width:210px;opacity:.40}
-  .leaf-branch{width:110px;opacity:.44}
-  .leaf-drift{width:48px;opacity:.48}
-  .petal-img{width:76px;opacity:.50}
-  .small-flowers{width:95px;opacity:.42}
-  .decor-sun-fast{width:72px;opacity:.32}
-  .butterfly{width:48px;opacity:.72}
-  .sparkle{width:78px;opacity:.50}
-  .decor-divider-img{width:175px;margin:10px auto 18px}
-  .ornament-couple,.ornament-event,.ornament-gift,.ornament-footer-bottom{bottom:.3%}
-  .quran-leaf-branch,.gift-leaf-branch,.footer-leaf-branch{left:-45px}
-  .event-leaf-branch{right:-45px}
-}
-
-/* End all-decor enhancement */
-
 @media(prefers-reduced-motion:reduce){
-  .scene-decor,.sun-petal,.leaf-branch,.leaf-drift,.petal-img,.small-flowers,.decor-sun-fast,.butterfly,.sparkle,.ornament-floating,.decor-divider-img,#cover::before,.sunflower-scene::before{
+  .scene-decor,.sun-petal,#cover::before,.sunflower-scene::before{
     animation:none !important;
   }
 }
@@ -1625,14 +1275,6 @@ body{
 ========================= -->
 
 <div id="cover">
-
-  <img src="decor-ornament-top.png" class="scene-decor ornament-floating ornament-top-cover" alt="" aria-hidden="true">
-  <img src="decor-sun.png" class="scene-decor decor-sun-fast cover-sun" alt="" aria-hidden="true">
-  <img src="decor-butterfly.png" class="scene-decor butterfly butterfly-cover" alt="" aria-hidden="true">
-  <img src="decor-sparkle.png" class="scene-decor sparkle sparkle-cover" alt="" aria-hidden="true">
-  <img src="decor-leaf.png" class="scene-decor leaf-drift cover-leaf-a" alt="" aria-hidden="true">
-  <img src="decor-leaf.png" class="scene-decor leaf-drift reverse cover-leaf-b" alt="" aria-hidden="true">
-  <img src="decor-petal.png" class="scene-decor petal-img petal-fast cover-petals" alt="" aria-hidden="true">
 
   <img src="decor-sunflower-trio.png" class="scene-decor decor-cover-left" alt="" aria-hidden="true">
   <img src="decor-sunflower-bouquet.png" class="scene-decor decor-cover-right" alt="" aria-hidden="true">
@@ -1692,15 +1334,6 @@ body{
 
 <section class="quran sunflower-scene">
 
-  <img src="decor-ornament-top.png" class="scene-decor ornament-floating ornament-quran" alt="" aria-hidden="true">
-  <img src="decor-leaf-branch.png" class="scene-decor leaf-branch quran-leaf-branch" alt="" aria-hidden="true">
-  <img src="decor-leaf.png" class="scene-decor leaf-drift quran-leaf-a" alt="" aria-hidden="true">
-  <img src="decor-leaf.png" class="scene-decor leaf-drift reverse quran-leaf-b" alt="" aria-hidden="true">
-  <img src="decor-small-flowers.png" class="scene-decor small-flowers quran-small-flowers" alt="" aria-hidden="true">
-  <img src="decor-butterfly.png" class="scene-decor butterfly butterfly-quran" alt="" aria-hidden="true">
-  <img src="decor-sparkle.png" class="scene-decor sparkle sparkle-quran" alt="" aria-hidden="true">
-  <img src="decor-petal.png" class="scene-decor petal-img quran-petals" alt="" aria-hidden="true">
-
   <img src="decor-sunflower-bouquet.png" class="scene-decor decor-quran" alt="" aria-hidden="true">
   <span class="sun-petal p1"></span>
   <span class="sun-petal p3"></span>
@@ -1713,7 +1346,11 @@ body{
       وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةًۗ اِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ
     </div>
 
-    <img src="decor-divider.png" class="decor-divider-img" alt="" aria-hidden="true">
+    <div class="ornament">
+      <span></span>
+      <i></i>
+      <span></span>
+    </div>
 
     <p class="quote">
       "Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."
@@ -1736,10 +1373,8 @@ body{
 
   <img src="decor-sunflower-left.png" class="scene-decor decor-couple-left" alt="" aria-hidden="true">
   <img src="decor-sunflower-right.png" class="scene-decor decor-couple-right" alt="" aria-hidden="true">
-  <img src="decor-leaf.png" class="scene-decor leaf-drift couple-leaf-a" alt="" aria-hidden="true">
-  <img src="decor-leaf.png" class="scene-decor leaf-drift couple-leaf-b" alt="" aria-hidden="true">
-  <img src="decor-sparkle.png" class="scene-decor sparkle sparkle-couple" alt="" aria-hidden="true">
-  <img src="decor-ornament-bottom.png" class="scene-decor ornament-floating ornament-couple" alt="" aria-hidden="true">
+  <span class="sun-petal p2"></span>
+
 
   <div class="inner reveal">
 
@@ -1751,21 +1386,18 @@ body{
       Mempelai
     </h2>
 
-    <img src="decor-divider.png" class="decor-divider-img" alt="" aria-hidden="true">
+    <div class="ornament">
+      <span></span>
+      <i></i>
+      <span></span>
+    </div>
 
     <p class="intro">
-      Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan.
-      Dengan memohon ridha dan rahmat Allah SWT, kami bermaksud merangkaikan
-      ikatan suci pernikahan putra-putri kami.
+      Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Dengan memohon ridha dan rahmat Allah SWT, kami bermaksud merangkaikan ikatan suci pernikahan putra-putri kami.
     </p>
 
     <div class="couple-grid">
-
-      <div class="person">
-        <div class="photo">
-          <img src="ChatGPT Image Aug 17, 2026, 11_32_30 AM.png" alt="Foto Jihan">
-        </div>
-
+        
         <h2 class="person-name script">
           Jihan [Nama Lengkap]
         </h2>
@@ -1777,16 +1409,14 @@ body{
           <br>
           [Kecamatan / Kota Asal]
         </p>
+
       </div>
+
 
       <div class="amp script">
         &
       </div>
 
-      <div class="person">
-        <div class="photo">
-          <img src="ChatGPT Image Aug 17, 2026, 11_26_06 AM.png" alt="Foto Risaldi">
-        </div>
 
         <h2 class="person-name script">
           Risaldi [Nama Lengkap]
@@ -1799,6 +1429,7 @@ body{
           <br>
           [Kecamatan / Kota Asal]
         </p>
+
       </div>
 
     </div>
@@ -1813,15 +1444,6 @@ body{
 ========================= -->
 
 <section class="event sunflower-scene">
-
-  <img src="decor-sun.png" class="scene-decor decor-sun-fast event-sun" alt="" aria-hidden="true">
-  <img src="decor-ornament-bottom.png" class="scene-decor ornament-floating ornament-event" alt="" aria-hidden="true">
-  <img src="decor-leaf-branch.png" class="scene-decor leaf-branch event-leaf-branch" alt="" aria-hidden="true">
-  <img src="decor-leaf.png" class="scene-decor leaf-drift event-leaf-a" alt="" aria-hidden="true">
-  <img src="decor-leaf.png" class="scene-decor leaf-drift reverse event-leaf-b" alt="" aria-hidden="true">
-  <img src="decor-small-flowers.png" class="scene-decor small-flowers event-small-flowers" alt="" aria-hidden="true">
-  <img src="decor-sparkle.png" class="scene-decor sparkle sparkle-event" alt="" aria-hidden="true">
-  <img src="decor-petal.png" class="scene-decor petal-img petal-fast event-petals" alt="" aria-hidden="true">
 
   <img src="decor-sunflower-cluster.png" class="scene-decor decor-event" alt="" aria-hidden="true">
   <span class="sun-petal p2"></span>
@@ -1838,7 +1460,6 @@ body{
       Rangkaian Acara
     </h2>
 
-    <img src="decor-divider.png" class="decor-divider-img" alt="" aria-hidden="true">
 
     <div class="countdown">
 
@@ -1960,13 +1581,6 @@ body{
 
 <section class="gift sunflower-scene">
 
-  <img src="decor-ornament-bottom.png" class="scene-decor ornament-floating ornament-gift" alt="" aria-hidden="true">
-  <img src="decor-leaf-branch.png" class="scene-decor leaf-branch gift-leaf-branch" alt="" aria-hidden="true">
-  <img src="decor-leaf.png" class="scene-decor leaf-drift gift-leaf-a" alt="" aria-hidden="true">
-  <img src="decor-butterfly.png" class="scene-decor butterfly butterfly-gift" alt="" aria-hidden="true">
-  <img src="decor-sparkle.png" class="scene-decor sparkle sparkle-gift" alt="" aria-hidden="true">
-  <img src="decor-petal.png" class="scene-decor petal-img gift-petals" alt="" aria-hidden="true">
-
   <img src="decor-sunflower-bouquet.png" class="scene-decor decor-gift" alt="" aria-hidden="true">
   <span class="sun-petal p1"></span>
   <span class="sun-petal p4"></span>
@@ -2026,12 +1640,6 @@ body{
 ========================= -->
 
 <section class="rsvp sunflower-scene">
-
-  <img src="decor-ornament-top.png" class="scene-decor ornament-floating ornament-rsvp" alt="" aria-hidden="true">
-  <img src="decor-small-flowers.png" class="scene-decor small-flowers rsvp-small-flowers" alt="" aria-hidden="true">
-  <img src="decor-leaf.png" class="scene-decor leaf-drift reverse rsvp-leaf-a" alt="" aria-hidden="true">
-  <img src="decor-sparkle.png" class="scene-decor sparkle sparkle-rsvp" alt="" aria-hidden="true">
-  <img src="decor-petal.png" class="scene-decor petal-img petal-fast rsvp-petals" alt="" aria-hidden="true">
 
   <img src="decor-sunflower-cluster.png" class="scene-decor decor-rsvp" alt="" aria-hidden="true">
   <span class="sun-petal p2"></span>
@@ -2148,16 +1756,6 @@ body{
 ========================= -->
 
 <section class="footer sunflower-scene">
-
-  <img src="decor-ornament-top.png" class="scene-decor ornament-floating ornament-footer-top" alt="" aria-hidden="true">
-  <img src="decor-ornament-bottom.png" class="scene-decor ornament-floating ornament-footer-bottom" alt="" aria-hidden="true">
-  <img src="decor-sun.png" class="scene-decor decor-sun-fast footer-sun" alt="" aria-hidden="true">
-  <img src="decor-leaf-branch.png" class="scene-decor leaf-branch footer-leaf-branch" alt="" aria-hidden="true">
-  <img src="decor-leaf.png" class="scene-decor leaf-drift footer-leaf-a" alt="" aria-hidden="true">
-  <img src="decor-small-flowers.png" class="scene-decor small-flowers footer-small-flowers" alt="" aria-hidden="true">
-  <img src="decor-butterfly.png" class="scene-decor butterfly butterfly-footer" alt="" aria-hidden="true">
-  <img src="decor-sparkle.png" class="scene-decor sparkle sparkle-footer" alt="" aria-hidden="true">
-  <img src="decor-petal.png" class="scene-decor petal-img footer-petals" alt="" aria-hidden="true">
 
   <img src="decor-sunflower-trio.png" class="scene-decor decor-footer" alt="" aria-hidden="true">
   <span class="sun-petal p1"></span>
