@@ -778,8 +778,7 @@
       },
       // Tempel link Web App Apps Script yang berakhiran /exec di antara tanda kutip.
       // Contoh: "https://script.google.com/macros/s/XXXXXXXXXXXXXXXX/exec"
-      googleSheetsEndpoint: "https://script.google.com/macros/s/AKfycby48nxc2o8_56lXhhUdQp7NGhY5V9uX0VRbQqvnmS4I6X3I4qtP3RKfA91KdbkiAbck/exec",
-      rsvpStorageKey: "jihan-risaldi-rsvp-v2"
+      googleSheetsEndpoint: "https://script.google.com/macros/s/AKfycby48nxc2o8_56lXhhUdQp7NGhY5V9uX0VRbQqvnmS4I6X3I4qtP3RKfA91KdbkiAbck/exec2"
     };
 
     const $ = (selector, parent = document) => parent.querySelector(selector);
@@ -1003,12 +1002,20 @@
 
       if (CONFIG.googleSheetsEndpoint) {
         try {
-          await fetch(CONFIG.googleSheetsEndpoint, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(entry)
-          });
+const payload = new URLSearchParams({
+  nama: entry.name,
+  kehadiran: entry.attendance,
+  ucapan: entry.message
+});
+
+await fetch(CONFIG.googleSheetsEndpoint, {
+  method: "POST",
+  mode: "no-cors",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+  },
+  body: payload.toString()
+});
         } catch (error) {
           console.warn("RSVP tersimpan di perangkat, tetapi gagal dikirim ke endpoint.", error);
         }
