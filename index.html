@@ -243,6 +243,80 @@
       animation: beetleBodyMove .72s ease-in-out infinite alternate;
     }
 
+    /* DEDAUNAN TERTIUP ANGIN DAN PARTIKEL CAHAYA */
+    .ambient-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 7;
+      overflow: hidden;
+      pointer-events: none;
+      user-select: none;
+    }
+    .ambient-leaf,
+    .ambient-light {
+      position: absolute;
+      display: block;
+      pointer-events: none;
+      will-change: top, transform, opacity, filter;
+    }
+    .ambient-leaf {
+      top: -12%;
+      left: var(--x, 50%);
+      width: var(--size, 13px);
+      aspect-ratio: 1.75 / 1;
+      border-radius: 100% 0 100% 0;
+      opacity: var(--opacity, .42);
+      background: linear-gradient(145deg, rgba(151, 153, 67, .9), rgba(92, 112, 51, .72));
+      box-shadow: inset 1px 1px rgba(255, 247, 178, .28);
+      filter: blur(.05px) drop-shadow(0 3px 3px rgba(73, 72, 35, .13));
+      transform-origin: 50% 100%;
+      animation: ambientLeafDrift var(--duration, 14s) linear var(--delay, 0s) infinite;
+    }
+    .ambient-leaf::after {
+      content: "";
+      position: absolute;
+      left: 16%;
+      top: 52%;
+      width: 75%;
+      height: 1px;
+      border-radius: 999px;
+      background: rgba(67, 81, 39, .48);
+      transform: rotate(-29deg);
+      transform-origin: left center;
+    }
+    .ambient-leaf.is-gold {
+      background: linear-gradient(145deg, rgba(221, 181, 63, .88), rgba(157, 117, 34, .68));
+    }
+    .ambient-leaf.is-pale {
+      background: linear-gradient(145deg, rgba(190, 190, 105, .78), rgba(111, 130, 66, .6));
+    }
+    .ambient-light {
+      left: var(--x, 50%);
+      top: var(--y, 50%);
+      width: var(--size, 5px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      opacity: 0;
+      background: radial-gradient(circle, #fffde1 0 18%, #ffe987 32%, rgba(245, 193, 52, .36) 58%, transparent 76%);
+      box-shadow:
+        0 0 7px rgba(255, 233, 126, .92),
+        0 0 16px rgba(243, 184, 45, .42);
+      mix-blend-mode: screen;
+      animation: ambientLightFloat var(--duration, 5.5s) ease-in-out var(--delay, 0s) infinite;
+    }
+    .ambient-light::before,
+    .ambient-light::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      border-radius: 999px;
+      background: rgba(255, 249, 192, .8);
+      transform: translate(-50%, -50%);
+    }
+    .ambient-light::before { width: 1px; height: 240%; }
+    .ambient-light::after { width: 240%; height: 1px; }
+
     .eyebrow {
       margin: 0 0 8px;
       color: #56451f;
@@ -702,6 +776,42 @@
       from { transform: translateY(0) scale(1); }
       to { transform: translateY(-2px) scale(.97, 1.03); }
     }
+    @keyframes ambientLeafDrift {
+      0% {
+        top: -12%;
+        transform: translate3d(0, -16px, 0) rotate(var(--rotate-start, -25deg)) scale(.88);
+      }
+      24% {
+        transform: translate3d(var(--sway-a, 24px), 0, 0) rotate(65deg) scale(1);
+      }
+      51% {
+        transform: translate3d(var(--sway-b, -18px), 0, 0) rotate(155deg) scale(.92);
+      }
+      76% {
+        transform: translate3d(var(--sway-c, 30px), 0, 0) rotate(245deg) scale(1.03);
+      }
+      100% {
+        top: 112%;
+        transform: translate3d(var(--drift, 45px), 18px, 0) rotate(var(--spin, 390deg)) scale(.9);
+      }
+    }
+    @keyframes ambientLightFloat {
+      0%, 100% {
+        opacity: .12;
+        transform: translate3d(0, 11px, 0) scale(.58);
+        filter: brightness(.85);
+      }
+      34% {
+        opacity: var(--opacity, .72);
+        transform: translate3d(var(--sway-a, 8px), -7px, 0) scale(1.08);
+        filter: brightness(1.25);
+      }
+      67% {
+        opacity: .28;
+        transform: translate3d(var(--sway-b, -6px), -19px, 0) scale(.72);
+        filter: brightness(.95);
+      }
+    }
     @keyframes musicPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 
     @media (min-width: 740px) {
@@ -716,6 +826,8 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
       .reveal { opacity: 1; transform: none; }
+      .ambient-leaf { display: none; }
+      .ambient-light { opacity: .38; animation: none !important; }
     }
   </style>
 </head>
@@ -1076,6 +1188,81 @@
       return name && name.trim() ? name.trim() : "Tamu Undangan";
     }
 
+    function createAmbientEffects() {
+      const compactScreen = matchMedia("(max-width: 480px)").matches;
+      const leafCount = compactScreen ? 4 : 6;
+      const lightCount = compactScreen ? 7 : 10;
+      const targets = [$(".cover-stage"), ...$$(".scene")].filter(Boolean);
+      const leafPositions = [7, 82, 28, 64, 43, 92];
+      const lightPositions = [
+        [9, 17], [78, 12], [29, 36], [89, 48], [14, 68],
+        [67, 78], [43, 91], [55, 24], [34, 61], [84, 87]
+      ];
+
+      targets.forEach((target, sceneIndex) => {
+        if (target.querySelector(":scope > .ambient-layer")) return;
+
+        const layer = document.createElement("div");
+        layer.className = "ambient-layer";
+        layer.setAttribute("aria-hidden", "true");
+        const fragment = document.createDocumentFragment();
+
+        for (let index = 0; index < leafCount; index++) {
+          const leaf = document.createElement("i");
+          const variant = (index + sceneIndex) % 3;
+          leaf.className = `ambient-leaf${variant === 1 ? " is-gold" : variant === 2 ? " is-pale" : ""}`;
+
+          const direction = (index + sceneIndex) % 2 === 0 ? 1 : -1;
+          const x = (leafPositions[index] + sceneIndex * 11) % 94 + 2;
+          const duration = 12.5 + ((index * 2.1 + sceneIndex) % 6);
+          const delay = -((index * 3.4 + sceneIndex * 1.7) % duration);
+          const size = 10 + ((index * 3 + sceneIndex) % 8);
+
+          leaf.style.cssText = [
+            `--x:${x}%`,
+            `--size:${size}px`,
+            `--duration:${duration.toFixed(1)}s`,
+            `--delay:${delay.toFixed(1)}s`,
+            `--opacity:${(.32 + ((index + sceneIndex) % 4) * .055).toFixed(2)}`,
+            `--sway-a:${direction * (18 + index * 3)}px`,
+            `--sway-b:${direction * -(14 + sceneIndex % 9)}px`,
+            `--sway-c:${direction * (25 + sceneIndex % 12)}px`,
+            `--drift:${direction * (34 + index * 5)}px`,
+            `--rotate-start:${direction * -(16 + index * 5)}deg`,
+            `--spin:${direction * (340 + index * 24)}deg`
+          ].join(";");
+          fragment.appendChild(leaf);
+        }
+
+        for (let index = 0; index < lightCount; index++) {
+          const light = document.createElement("i");
+          light.className = "ambient-light";
+
+          const base = lightPositions[index];
+          const x = (base[0] + sceneIndex * 7) % 92 + 4;
+          const y = (base[1] + sceneIndex * 9) % 88 + 5;
+          const duration = 4.2 + ((index * .73 + sceneIndex * .41) % 3.2);
+          const delay = -((index * 1.17 + sceneIndex * .83) % duration);
+          const direction = (index + sceneIndex) % 2 === 0 ? 1 : -1;
+
+          light.style.cssText = [
+            `--x:${x}%`,
+            `--y:${y}%`,
+            `--size:${3 + ((index + sceneIndex) % 5)}px`,
+            `--duration:${duration.toFixed(2)}s`,
+            `--delay:${delay.toFixed(2)}s`,
+            `--opacity:${(.52 + ((index + sceneIndex) % 4) * .07).toFixed(2)}`,
+            `--sway-a:${direction * (5 + index % 7)}px`,
+            `--sway-b:${direction * -(4 + sceneIndex % 6)}px`
+          ].join(";");
+          fragment.appendChild(light);
+        }
+
+        layer.appendChild(fragment);
+        target.appendChild(layer);
+      });
+    }
+
     const music = $("#background-music");
     const musicButton = $("#music-button");
     let musicWanted = true;
@@ -1351,6 +1538,7 @@
       }
     });
 
+    createAmbientEffects();
     applyConfig();
     $("#guest-name").textContent = getGuestName();
     $("#rsvp-name").value = getGuestName() === "Tamu Undangan" ? "" : getGuestName();
