@@ -389,22 +389,37 @@
 
     /* RSVP */
     #rsvp { display: block; padding-block: 120px 170px; }
-    .rsvp-card { padding: 27px 20px; text-align: center; }
-    .form-grid { display: grid; gap: 12px; }
-    label { display: block; margin: 0 0 6px; font-size: .65rem; font-weight: 600; letter-spacing: .04em; }
-    input, select, textarea { width: 100%; border: 1px solid rgba(137,112,58,.25); border-radius: 13px; outline: none; color: var(--ink); background: rgba(255,255,255,.67); padding: 12px 13px; font-size: .75rem; text-align: center; transition: border-color .2s, box-shadow .2s; }
-    input:focus, select:focus, textarea:focus { border-color: var(--yellow-400); box-shadow: 0 0 0 3px rgba(223,181,63,.16); }
-    textarea { min-height: 95px; resize: vertical; }
-    .rsvp-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin: 16px 0; }
-    .stat { padding: 12px; border-radius: 14px; background: rgba(255,255,255,.55); text-align: center; }
-    .stat strong { display: block; color: var(--yellow-500); font-family: var(--serif); font-size: 1.5rem; }
-    .stat span { font-size: .6rem; text-transform: uppercase; letter-spacing: .08em; }
-    .wishes { display: grid; gap: 9px; max-height: 300px; margin-top: 18px; overflow: auto; }
-    .wish { padding: 13px 14px; border-radius: 14px; background: rgba(255,255,255,.52); }
-    .wish strong { display: block; color: var(--brown); font-family: var(--serif); }
-    .wish small { color: var(--olive-500); }
-    .wish p { margin: 5px 0 0; font-size: .68rem; line-height: 1.65; }
+    .rsvp-card { padding: 28px 20px; text-align: center; }
+    .rsvp-intro { margin: 0 auto 18px; color: rgba(62,56,44,.76); font-size: .72rem; line-height: 1.7; }
+    .rsvp-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 0 20px; }
+    .stat { min-width: 0; padding: 12px 6px; border: 1px solid rgba(137,112,58,.18); border-radius: 15px; background: rgba(255,255,255,.58); text-align: center; }
+    .stat strong { display: block; color: var(--yellow-500); font-family: var(--serif); font-size: 1.5rem; line-height: 1; }
+    .stat span { display: block; margin-top: 6px; font-size: .52rem; font-weight: 600; letter-spacing: .07em; line-height: 1.35; text-transform: uppercase; }
+    .form-grid { display: grid; gap: 11px; }
+    .form-group { display: grid; gap: 6px; }
+    .form-group label { display: block; margin: 0; font-size: .63rem; font-weight: 600; letter-spacing: .04em; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea { width: 100%; border: 1px solid rgba(137,112,58,.25); border-radius: 13px; outline: none; color: var(--ink); background: rgba(255,255,255,.77); padding: 13px 14px; font-size: .75rem; text-align: center; transition: border-color .2s, box-shadow .2s, background .2s; }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--yellow-400); background: rgba(255,255,255,.94); box-shadow: 0 0 0 3px rgba(223,181,63,.16); }
+    .form-group textarea { min-height: 96px; resize: vertical; }
+    #submit-rsvp { width: 100%; margin-top: 2px; }
+    #submit-rsvp:disabled { cursor: wait; opacity: .62; transform: none; }
     .form-status { min-height: 20px; margin: 10px 0 0; color: var(--olive-700); font-size: .68rem; text-align: center; }
+    .comments { margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(137,112,58,.2); }
+    .comments-title { margin: 0 0 10px; color: var(--brown); font-family: var(--serif); font-size: 1rem; font-weight: 700; }
+    .comment-list { display: flex; max-height: 285px; overflow: auto; flex-direction: column; gap: 8px; padding-right: 3px; text-align: left; scrollbar-width: thin; scrollbar-color: rgba(191,142,34,.55) transparent; }
+    .comment { padding: 12px 13px; border: 1px solid rgba(137,112,58,.16); border-radius: 13px; background: rgba(255,255,255,.58); text-align: left; }
+    .comment-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+    .comment-name { color: var(--brown); font-family: var(--serif); font-size: .92rem; font-weight: 700; }
+    .comment-attendance { flex: 0 0 auto; font-size: .57rem; font-weight: 600; letter-spacing: .03em; }
+    .comment-attendance.is-present { color: #4d7540; }
+    .comment-attendance.is-absent { color: #a2574d; }
+    .comment-message { margin: 5px 0 0; color: rgba(62,56,44,.86); font-size: .68rem; line-height: 1.65; text-align: left !important; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .comment-time { display: block; margin-top: 6px; color: rgba(62,56,44,.52); font-size: .55rem; }
+    .comment-state { color: rgba(62,56,44,.58); text-align: center; }
 
     /* CLOSING */
     #closing { min-height: 100svh; padding-bottom: 160px; }
@@ -675,34 +690,43 @@
         <p class="eyebrow reveal">Konfirmasi Kehadiran</p>
         <h2 class="section-title reveal delay-1">RSVP &amp; Ucapan</h2>
         <div class="glass-card rsvp-card reveal delay-2">
+          <p class="rsvp-intro">Silakan konfirmasi kehadiran dan kirimkan doa terbaik untuk kedua mempelai.</p>
+
+          <div class="rsvp-stats" aria-label="Statistik RSVP">
+            <div class="stat"><strong id="attending-count">0</strong><span>Akan Hadir</span></div>
+            <div class="stat"><strong id="not-attending-count">0</strong><span>Tidak Hadir</span></div>
+            <div class="stat"><strong id="wishes-count">0</strong><span>Ucapan</span></div>
+          </div>
+
           <form id="rsvp-form">
             <div class="form-grid">
-              <div>
+              <div class="form-group">
                 <label for="rsvp-name">Nama</label>
                 <input id="rsvp-name" name="name" required autocomplete="name" placeholder="Masukkan nama Anda">
               </div>
-              <div>
+              <div class="form-group">
                 <label for="attendance">Konfirmasi</label>
                 <select id="attendance" name="attendance" required>
                   <option value="">Pilih konfirmasi</option>
-                  <option value="Hadir">Hadir</option>
-                  <option value="Tidak Hadir">Tidak Hadir</option>
+                  <option value="Hadir">Ya, saya akan hadir</option>
+                  <option value="Tidak Hadir">Maaf, saya tidak bisa hadir</option>
                 </select>
               </div>
-              <div>
+              <div class="form-group">
                 <label for="message">Ucapan dan Doa</label>
-                <textarea id="message" name="message" required placeholder="Tuliskan ucapan terbaik Anda"></textarea>
+                <textarea id="message" name="message" rows="3" required placeholder="Tulis doa dan ucapan..."></textarea>
               </div>
-              <button class="btn" id="submit-rsvp" type="submit">Kirim Konfirmasi</button>
+              <button class="btn" id="submit-rsvp" type="submit">Kirim Ucapan</button>
             </div>
             <p class="form-status" id="form-status" role="status"></p>
           </form>
 
-          <div class="rsvp-stats">
-            <div class="stat"><strong id="attending-count">0</strong><span>Hadir</span></div>
-            <div class="stat"><strong id="not-attending-count">0</strong><span>Tidak Hadir</span></div>
+          <div class="comments">
+            <h3 class="comments-title">Ucapan dari Tamu</h3>
+            <div class="comment-list" id="wishes-list" aria-live="polite">
+              <div class="comment comment-state">Memuat ucapan...</div>
+            </div>
           </div>
-          <div class="wishes" id="wishes-list"></div>
         </div>
       </div>
     </section>
@@ -735,7 +759,7 @@
   </main>
 
   <audio id="background-music" loop preload="none">
-    <source src="assets/audio/lagu-pernikahan.mp3" type="audio/mpeg">
+    <source src="assets/audio/wedding-music.mp3" type="audio/mpeg">
   </audio>
   <button class="music-button" id="music-button" type="button" aria-label="Putar atau hentikan musik" title="Musik">♫</button>
   <div class="toast" id="toast" role="status"></div>
@@ -956,89 +980,149 @@
       URL.revokeObjectURL(url);
     });
 
-    function getRSVP() {
-      try { return JSON.parse(localStorage.getItem(CONFIG.rsvpStorageKey)) || []; }
-      catch (error) { return []; }
-    }
-    function saveRSVP(items) { localStorage.setItem(CONFIG.rsvpStorageKey, JSON.stringify(items)); }
     function escapeHTML(value) {
       const div = document.createElement("div");
-      div.textContent = value;
+      div.textContent = String(value ?? "");
       return div.innerHTML;
     }
-    function renderRSVP() {
-      const items = getRSVP();
-      $("#attending-count").textContent = items.filter(item => item.attendance === "Hadir").length;
-      $("#not-attending-count").textContent = items.filter(item => item.attendance === "Tidak Hadir").length;
-      $("#wishes-list").innerHTML = items.length ? items.slice().reverse().map(item => `
-        <article class="wish">
-          <strong>${escapeHTML(item.name)}</strong>
-          <small>${escapeHTML(item.attendance)}</small>
-          <p>${escapeHTML(item.message)}</p>
-        </article>`).join("") : '<article class="wish"><p>Belum ada ucapan. Jadilah yang pertama memberikan doa terbaik.</p></article>';
+
+    function formatRSVPTime(value) {
+      if (!value) return "";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return String(value);
+      return new Intl.DateTimeFormat("id-ID", {
+        dateStyle: "medium",
+        timeStyle: "short",
+        timeZone: "Asia/Makassar"
+      }).format(date) + " WITA";
     }
 
-$("#rsvp-form").addEventListener("submit", async event => {
-  event.preventDefault();
+    function renderRSVP(items, stats = {}) {
+      const safeItems = Array.isArray(items) ? items : [];
+      $("#attending-count").textContent = Number(stats.hadir || 0);
+      $("#not-attending-count").textContent = Number(stats.tidakHadir || 0);
+      $("#wishes-count").textContent = Number(stats.total ?? safeItems.length);
 
-  const button = $("#submit-rsvp");
-  const status = $("#form-status");
-  const formData = new FormData(event.currentTarget);
+      if (!safeItems.length) {
+        $("#wishes-list").innerHTML = '<div class="comment comment-state">Belum ada ucapan.</div>';
+        return;
+      }
 
-  const entry = {
-    name: String(formData.get("name") || "").trim(),
-    attendance: String(formData.get("attendance") || ""),
-    message: String(formData.get("message") || "").trim(),
-    createdAt: new Date().toISOString()
-  };
+      $("#wishes-list").innerHTML = safeItems.map(item => {
+        const attendance = String(item.kehadiran || "");
+        const attendanceClass = attendance === "Hadir" ? "is-present" : "is-absent";
+        const time = formatRSVPTime(item.waktu);
+        return `
+          <article class="comment">
+            <div class="comment-head">
+              <strong class="comment-name">${escapeHTML(item.nama || "Tamu")}</strong>
+              <span class="comment-attendance ${attendanceClass}">${escapeHTML(attendance)}</span>
+            </div>
+            <p class="comment-message">${escapeHTML(item.ucapan || "")}</p>
+            ${time ? `<time class="comment-time">${escapeHTML(time)}</time>` : ""}
+          </article>`;
+      }).join("");
+    }
 
-  if (!entry.name || !entry.attendance || !entry.message) return;
+    let rsvpIsLoading = false;
 
-  button.disabled = true;
-  button.textContent = "Mengirim...";
-  status.textContent = "";
+    async function loadRSVP(showLoading = false) {
+      if (!CONFIG.googleSheetsEndpoint || rsvpIsLoading) return;
+      rsvpIsLoading = true;
 
-  const dataUntukSheet = {
-    nama: entry.name,
-    kehadiran: entry.attendance,
-    ucapan: entry.message,
-    tamuUndangan: getGuestName()
-  };
+      if (showLoading) {
+        $("#wishes-list").innerHTML = '<div class="comment comment-state">Memuat ucapan...</div>';
+      }
 
-  if (CONFIG.googleSheetsEndpoint) {
-    try {
-      await fetch(CONFIG.googleSheetsEndpoint, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(dataUntukSheet)
+      try {
+        const separator = CONFIG.googleSheetsEndpoint.includes("?") ? "&" : "?";
+        const response = await fetch(`${CONFIG.googleSheetsEndpoint}${separator}v=${Date.now()}`, {
+          method: "GET",
+          cache: "no-store"
+        });
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const result = await response.json();
+        if (result.status !== "success") {
+          throw new Error(result.message || "Gagal mengambil data RSVP");
+        }
+
+        renderRSVP(result.data || [], result.stats || {});
+      } catch (error) {
+        console.error("Gagal mengambil RSVP:", error);
+        $("#wishes-list").innerHTML = '<div class="comment comment-state">Ucapan belum dapat dimuat. Periksa deployment Apps Script.</div>';
+      } finally {
+        rsvpIsLoading = false;
+      }
+    }
+
+    function withTimeout(promise, milliseconds = 12000) {
+      let timer;
+      const timeout = new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new Error("Waktu pengiriman habis")), milliseconds);
       });
-    } catch (error) {
-      console.warn(
-        "Gagal mengirim data ke Google Sheets.",
-        error
-      );
+      return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
     }
-  }
 
-  const items = getRSVP();
-  items.push(entry);
-  saveRSVP(items);
-  renderRSVP();
+    $("#rsvp-form").addEventListener("submit", async event => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const button = $("#submit-rsvp");
+      const status = $("#form-status");
+      const formData = new FormData(form);
+      const dataUntukSheet = {
+        nama: String(formData.get("name") || "").trim(),
+        kehadiran: String(formData.get("attendance") || ""),
+        ucapan: String(formData.get("message") || "").trim(),
+        tamuUndangan: getGuestName()
+      };
 
-  event.currentTarget.reset();
+      if (!dataUntukSheet.nama || !dataUntukSheet.kehadiran || !dataUntukSheet.ucapan) {
+        status.textContent = "Lengkapi nama, kehadiran, dan ucapan.";
+        return;
+      }
 
-  status.textContent = "Konfirmasi dan ucapan berhasil disimpan.";
-  button.disabled = false;
-  button.textContent = "Kirim Konfirmasi";
-});
+      if (!CONFIG.googleSheetsEndpoint) {
+        status.textContent = "Link Web App Apps Script belum dipasang.";
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = "Mengirim...";
+      status.textContent = "Data sedang dikirim.";
+
+      try {
+        await withTimeout(
+          fetch(CONFIG.googleSheetsEndpoint, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(dataUntukSheet)
+          }),
+          12000
+        );
+
+        form.reset();
+        const invitedGuest = getGuestName();
+        $("#rsvp-name").value = invitedGuest === "Tamu Undangan" ? "" : invitedGuest;
+        status.textContent = "Ucapan berhasil dikirim.";
+        showToast("Ucapan berhasil dikirim");
+      } catch (error) {
+        console.error("Gagal mengirim RSVP:", error);
+        status.textContent = "Pengiriman belum dapat dikonfirmasi. Silakan coba kembali.";
+      } finally {
+        button.disabled = false;
+        button.textContent = "Kirim Ucapan";
+        setTimeout(() => loadRSVP(false), 1400);
+      }
+    });
 
     applyConfig();
     $("#guest-name").textContent = getGuestName();
     $("#rsvp-name").value = getGuestName() === "Tamu Undangan" ? "" : getGuestName();
-    renderRSVP();
+    loadRSVP(true);
+    setInterval(() => loadRSVP(false), 30000);
   </script>
 </body>
 </html>
