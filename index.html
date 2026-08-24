@@ -415,7 +415,43 @@
     #hero { padding-top: 130px; }
     #hero .gate { width: 105%; left: -2.5%; bottom: 2%; opacity: .52; z-index: 3; }
     #hero .path { width: 58%; left: 21%; bottom: -18%; opacity: .55; }
-    .hero-card { padding: 18px 22px 24px; }
+    .hero-card {
+      position: relative;
+      isolation: isolate;
+      padding: 44px 28px 38px;
+      overflow: hidden;
+      border: 1px solid rgba(181, 137, 40, .26);
+      border-radius: 170px 170px 30px 30px / 92px 92px 30px 30px;
+      background:
+        linear-gradient(155deg, rgba(255, 254, 246, .42), rgba(255, 247, 215, .20)),
+        radial-gradient(circle at 50% 0%, rgba(242, 212, 111, .17), transparent 48%);
+      box-shadow:
+        0 18px 42px rgba(91, 72, 30, .10),
+        inset 0 1px 0 rgba(255, 255, 255, .58);
+      -webkit-backdrop-filter: blur(3px);
+      backdrop-filter: blur(3px);
+    }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      z-index: -1;
+      border: 1px solid rgba(181, 137, 40, .15);
+      border-radius: 158px 158px 22px 22px / 82px 82px 22px 22px;
+      pointer-events: none;
+    }
+    .hero-card::after {
+      content: "✦";
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      color: rgba(138, 97, 21, .46);
+      font-family: var(--serif);
+      font-size: .75rem;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    .hero-card > * { position: relative; z-index: 1; }
     .hero-card .eyebrow { margin-bottom: 36px; font-size: .94rem; }
     .hero-card .amp { display: inline-block; margin: 7px 0 1px; color: var(--olive-500); font-family: var(--serif); font-size: 1.55rem; }
     .hero-date { margin: 18px 0 0; color: var(--brown); font-family: var(--serif); font-size: 1.07rem; font-weight: 700; letter-spacing: .08em; }
