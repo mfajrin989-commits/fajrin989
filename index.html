@@ -193,6 +193,56 @@
     .bee { width: 45px; z-index: 8; animation: beeHover 4.2s ease-in-out infinite; }
     .ladybug { width: 27px; z-index: 9; animation: ladybugWalk 10s ease-in-out infinite alternate; }
 
+    /* SERANGGA HIDUP DI SEKITAR RUMPUT */
+    .grass-creature {
+      position: absolute;
+      left: var(--x, 50%);
+      bottom: var(--y, 135px);
+      z-index: 19;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+      will-change: transform;
+    }
+    .grass-creature img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: none;
+      transform-origin: center;
+      will-change: transform, filter, opacity;
+    }
+    .grass-butterfly-life {
+      width: var(--size, 58px);
+      animation: butterflyGrassRoute 7.8s ease-in-out var(--delay, 0s) infinite;
+    }
+    .grass-butterfly-life img {
+      animation: butterflyWingBeat .34s ease-in-out infinite alternate;
+    }
+    .grass-bee-life {
+      width: var(--size, 43px);
+      animation: beeGrassRoute 5.6s ease-in-out var(--delay, 0s) infinite;
+    }
+    .grass-bee-life img {
+      animation: beeWingBeat .16s ease-in-out infinite alternate;
+    }
+    .grass-firefly-life {
+      width: var(--size, 38px);
+      animation: fireflyGrassRoute 8.6s ease-in-out var(--delay, 0s) infinite;
+    }
+    .grass-firefly-life img {
+      animation:
+        fireflyWingBeat .24s ease-in-out infinite alternate,
+        fireflyGlow 1.45s ease-in-out var(--glow-delay, 0s) infinite;
+    }
+    .grass-beetle-life {
+      width: var(--size, 29px);
+      animation: beetleGrassRoute 11.5s ease-in-out var(--delay, 0s) infinite alternate;
+    }
+    .grass-beetle-life img {
+      animation: beetleBodyMove .72s ease-in-out infinite alternate;
+    }
+
     .eyebrow {
       margin: 0 0 8px;
       color: #56451f;
@@ -608,6 +658,50 @@
     @keyframes butterflyFloat { 0%,100% { transform: translate(0,0) rotate(-8deg) scaleY(1); } 35% { transform: translate(22px,-28px) rotate(7deg) scaleY(.84); } 70% { transform: translate(-12px,-48px) rotate(-5deg) scaleY(1); } }
     @keyframes beeHover { 0%,100% { transform: translate(0,0) rotate(-7deg); } 33% { transform: translate(17px,-13px) rotate(8deg); } 70% { transform: translate(-12px,-23px) rotate(-2deg); } }
     @keyframes ladybugWalk { from { transform: translateX(-8px) rotate(-8deg); } to { transform: translateX(52px) rotate(9deg); } }
+    @keyframes butterflyGrassRoute {
+      0%, 100% { transform: translate(0, 0) rotate(-8deg); }
+      24% { transform: translate(24px, -26px) rotate(7deg); }
+      52% { transform: translate(5px, -48px) rotate(-3deg); }
+      76% { transform: translate(-20px, -20px) rotate(9deg); }
+    }
+    @keyframes butterflyWingBeat {
+      from { transform: scaleX(1) scaleY(1) rotate(-2deg); }
+      to { transform: scaleX(.58) scaleY(.94) rotate(2deg); }
+    }
+    @keyframes beeGrassRoute {
+      0%, 100% { transform: translate(0, 0) rotate(-5deg); }
+      27% { transform: translate(-18px, -18px) rotate(8deg); }
+      55% { transform: translate(13px, -36px) rotate(-2deg); }
+      79% { transform: translate(25px, -12px) rotate(6deg); }
+    }
+    @keyframes beeWingBeat {
+      from { transform: scaleY(1) rotate(-1deg); }
+      to { transform: scaleY(.72) rotate(2deg); }
+    }
+    @keyframes fireflyGrassRoute {
+      0%, 100% { transform: translate(0, 0) rotate(-7deg); }
+      22% { transform: translate(18px, -24px) rotate(5deg); }
+      48% { transform: translate(-9px, -46px) rotate(-3deg); }
+      73% { transform: translate(-25px, -18px) rotate(8deg); }
+    }
+    @keyframes fireflyWingBeat {
+      from { transform: scaleX(1) rotate(-2deg); }
+      to { transform: scaleX(.66) rotate(2deg); }
+    }
+    @keyframes fireflyGlow {
+      0%, 100% { opacity: .76; filter: brightness(.92) drop-shadow(0 0 5px rgba(255, 205, 58, .65)); }
+      50% { opacity: 1; filter: brightness(1.32) drop-shadow(0 0 14px rgba(255, 213, 65, 1)); }
+    }
+    @keyframes beetleGrassRoute {
+      0% { transform: translateX(-12px) rotate(-9deg); }
+      35% { transform: translateX(18px) translateY(-4px) rotate(5deg); }
+      68% { transform: translateX(44px) translateY(2px) rotate(-4deg); }
+      100% { transform: translateX(70px) translateY(-3px) rotate(8deg); }
+    }
+    @keyframes beetleBodyMove {
+      from { transform: translateY(0) scale(1); }
+      to { transform: translateY(-2px) scale(.97, 1.03); }
+    }
     @keyframes musicPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 
     @media (min-width: 740px) {
@@ -646,8 +740,10 @@
       <img class="decor full-strip cover-field" src="assets/decor/sunflower-field.webp" alt="">
       <img class="decor grass-watercolor grass-watercolor-back" src="assets/decor/grass-lush-watercolor.webp" alt="" aria-hidden="true">
       <img class="decor grass-watercolor grass-watercolor-front" src="assets/decor/grass-lush-watercolor.webp" alt="" aria-hidden="true">
-      <img class="decor butterfly" style="top:17%;left:12%" src="assets/decor/butterfly-yellow.webp" alt="">
-      <img class="decor bee" style="top:33%;right:12%" src="assets/decor/bee.webp" alt="">
+      <span class="grass-creature grass-butterfly-life" style="--x:8%;--y:170px;--delay:-2.1s;--size:61px" aria-hidden="true"><img src="assets/decor/butterfly-yellow.webp" alt=""></span>
+      <span class="grass-creature grass-bee-life" style="--x:79%;--y:128px;--delay:-1.4s;--size:44px" aria-hidden="true"><img src="assets/decor/bee.webp" alt=""></span>
+      <span class="grass-creature grass-firefly-life" style="--x:57%;--y:190px;--delay:-4.3s;--glow-delay:-.7s;--size:39px" aria-hidden="true"><img src="assets/decor/firefly-glow.webp" alt=""></span>
+      <span class="grass-creature grass-beetle-life" style="--x:22%;--y:28px;--delay:-3.6s;--size:29px" aria-hidden="true"><img src="assets/decor/ladybug.webp" alt=""></span>
     </div>
 
     <div class="cover-panel">
@@ -685,7 +781,10 @@
       <img class="decor front full-strip flower-field" src="assets/decor/sunflower-field.webp" alt="">
       <img class="decor grass-watercolor grass-watercolor-back" src="assets/decor/grass-lush-watercolor.webp" alt="" aria-hidden="true">
       <img class="decor grass-watercolor grass-watercolor-front" src="assets/decor/grass-lush-watercolor.webp" alt="" aria-hidden="true">
-      <img class="decor butterfly" style="top:24%;right:11%" src="assets/decor/butterfly-blue.webp" alt="">
+      <span class="grass-creature grass-butterfly-life" style="--x:76%;--y:164px;--delay:-4.8s;--size:55px" aria-hidden="true"><img src="assets/decor/butterfly-blue.webp" alt=""></span>
+      <span class="grass-creature grass-bee-life" style="--x:12%;--y:122px;--delay:-3.2s;--size:42px" aria-hidden="true"><img src="assets/decor/bee.webp" alt=""></span>
+      <span class="grass-creature grass-firefly-life" style="--x:62%;--y:205px;--delay:-1.7s;--glow-delay:-1.1s;--size:37px" aria-hidden="true"><img src="assets/decor/firefly-glow.webp" alt=""></span>
+      <span class="grass-creature grass-beetle-life" style="--x:19%;--y:31px;--delay:-7.2s;--size:28px" aria-hidden="true"><img src="assets/decor/ladybug.webp" alt=""></span>
 
       <div class="scene-content">
         <div class="hero-card reveal">
@@ -753,7 +852,10 @@
       <img class="decor gazebo" src="assets/decor/gazebo.webp" alt="">
       <img class="decor grass-watercolor grass-watercolor-back" src="assets/decor/grass-lush-watercolor.webp" alt="" aria-hidden="true">
       <img class="decor grass-watercolor grass-watercolor-front" src="assets/decor/grass-lush-watercolor.webp" alt="" aria-hidden="true">
-      <img class="decor butterfly" style="top:20%;left:10%" src="assets/decor/butterfly-yellow.webp" alt="">
+      <span class="grass-creature grass-butterfly-life" style="--x:9%;--y:176px;--delay:-5.9s;--size:58px" aria-hidden="true"><img src="assets/decor/butterfly-yellow.webp" alt=""></span>
+      <span class="grass-creature grass-bee-life" style="--x:80%;--y:132px;--delay:-2.5s;--size:43px" aria-hidden="true"><img src="assets/decor/bee.webp" alt=""></span>
+      <span class="grass-creature grass-firefly-life" style="--x:53%;--y:196px;--delay:-6.4s;--glow-delay:-.3s;--size:40px" aria-hidden="true"><img src="assets/decor/firefly-glow.webp" alt=""></span>
+      <span class="grass-creature grass-beetle-life" style="--x:27%;--y:30px;--delay:-1.8s;--size:30px" aria-hidden="true"><img src="assets/decor/ladybug.webp" alt=""></span>
 
       <div class="scene-content">
         <p class="eyebrow reveal">Save The Date</p>
