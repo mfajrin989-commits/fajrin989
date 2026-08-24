@@ -110,7 +110,7 @@
     }
     .decor.behind { z-index: 0; filter: none; }
     .decor.front { z-index: 15; }
-    .full-strip { left: -8%; width: 116%; height: auto; }
+    .full-strip { left: -8%; width: 116%; max-width: none; height: auto; }
     .hill-back { bottom: 7%; opacity: .74; }
     .hill-front { bottom: -1%; opacity: .96; }
     .flower-field { bottom: -1px; z-index: 4; }
@@ -119,6 +119,7 @@
       left: -7%;
       bottom: -18px;
       width: 114%;
+      max-width: none;
       height: auto;
       z-index: 17;
       pointer-events: none;
