@@ -778,7 +778,7 @@
       },
       // Tempel link Web App Apps Script yang berakhiran /exec di antara tanda kutip.
       // Contoh: "https://script.google.com/macros/s/XXXXXXXXXXXXXXXX/exec"
-      googleSheetsEndpoint: "https://script.google.com/macros/s/AKfycby48nxc2o8_56lXhhUdQp7NGhY5V9uX0VRbQqvnmS4I6X3I4qtP3RKfA91KdbkiAbck/exec2"
+      googleSheetsEndpoint: "https://script.google.com/macros/s/AKfycby48nxc2o8_56lXhhUdQp7NGhY5V9uX0VRbQqvnmS4I6X3I4qtP3RKfA91KdbkiAbck/exec"
     };
 
     const $ = (selector, parent = document) => parent.querySelector(selector);
@@ -978,54 +978,62 @@
         </article>`).join("") : '<article class="wish"><p>Belum ada ucapan. Jadilah yang pertama memberikan doa terbaik.</p></article>';
     }
 
-    $("#rsvp-form").addEventListener("submit", async event => {
-      event.preventDefault();
-      const button = $("#submit-rsvp");
-      const status = $("#form-status");
-      const formData = new FormData(event.currentTarget);
-      const entry = {
-        name: String(formData.get("name") || "").trim(),
-        attendance: String(formData.get("attendance") || ""),
-        message: String(formData.get("message") || "").trim(),
-        createdAt: new Date().toISOString()
-      };
-      if (!entry.name || !entry.attendance || !entry.message) return;
+$("#rsvp-form").addEventListener("submit", async event => {
+  event.preventDefault();
 
-      button.disabled = true;
-      button.textContent = "Mengirim...";
-      status.textContent = "";
+  const button = $("#submit-rsvp");
+  const status = $("#form-status");
+  const formData = new FormData(event.currentTarget);
 
-      const items = getRSVP();
-      items.push(entry);
-      saveRSVP(items);
-      renderRSVP();
+  const entry = {
+    name: String(formData.get("name") || "").trim(),
+    attendance: String(formData.get("attendance") || ""),
+    message: String(formData.get("message") || "").trim(),
+    createdAt: new Date().toISOString()
+  };
 
-      if (CONFIG.googleSheetsEndpoint) {
-        try {
-const payload = new URLSearchParams({
-  nama: entry.name,
-  kehadiran: entry.attendance,
-  ucapan: entry.message
+  if (!entry.name || !entry.attendance || !entry.message) return;
+
+  button.disabled = true;
+  button.textContent = "Mengirim...";
+  status.textContent = "";
+
+  const dataUntukSheet = {
+    nama: entry.name,
+    kehadiran: entry.attendance,
+    ucapan: entry.message,
+    tamuUndangan: getGuestName()
+  };
+
+  if (CONFIG.googleSheetsEndpoint) {
+    try {
+      await fetch(CONFIG.googleSheetsEndpoint, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dataUntukSheet)
+      });
+    } catch (error) {
+      console.warn(
+        "Gagal mengirim data ke Google Sheets.",
+        error
+      );
+    }
+  }
+
+  const items = getRSVP();
+  items.push(entry);
+  saveRSVP(items);
+  renderRSVP();
+
+  event.currentTarget.reset();
+
+  status.textContent = "Konfirmasi dan ucapan berhasil disimpan.";
+  button.disabled = false;
+  button.textContent = "Kirim Konfirmasi";
 });
-
-await fetch(CONFIG.googleSheetsEndpoint, {
-  method: "POST",
-  mode: "no-cors",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-  },
-  body: payload.toString()
-});
-        } catch (error) {
-          console.warn("RSVP tersimpan di perangkat, tetapi gagal dikirim ke endpoint.", error);
-        }
-      }
-
-      event.currentTarget.reset();
-      status.textContent = "Konfirmasi dan ucapan berhasil disimpan.";
-      button.disabled = false;
-      button.textContent = "Kirim Konfirmasi";
-    });
 
     applyConfig();
     $("#guest-name").textContent = getGuestName();
