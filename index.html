@@ -129,8 +129,22 @@
     }
     .cloud.one { top: 9%; left: -190px; }
     .cloud.two { top: 24%; right: -210px; width: 180px; animation-duration: 38s; animation-delay: -17s; }
-    .tree-left { left: -32%; bottom: 2%; width: 82%; opacity: .88; transform-origin: bottom left; }
-    .tree-right { right: -32%; bottom: 2%; width: 82%; opacity: .88; transform-origin: bottom right; }
+    .tree-left {
+      left: -32%;
+      bottom: 2%;
+      width: 82%;
+      opacity: .88;
+      transform-origin: 16% 100%;
+      animation: treeWindLeft 5.8s ease-in-out infinite;
+    }
+    .tree-right {
+      right: -32%;
+      bottom: 2%;
+      width: 82%;
+      opacity: .88;
+      transform-origin: 84% 100%;
+      animation: treeWindRight 6.3s ease-in-out -2.1s infinite;
+    }
     .leaves-left { width: 58%; top: -3%; left: -12%; transform-origin: top left; animation: leafSway 5s ease-in-out infinite; }
     .leaves-right { width: 58%; top: -3%; right: -12%; transform-origin: top right; animation: leafSway 5.6s ease-in-out infinite reverse; }
     .sunflower-left { width: 54%; left: -14%; bottom: -2%; transform-origin: bottom left; animation: flowerSway 4.2s ease-in-out infinite; }
@@ -255,8 +269,22 @@
     .cover-stage { position: absolute; inset: 0; width: min(100%, 480px); margin: auto; overflow: hidden; }
     .cover-stage .gate { width: 92%; left: 4%; bottom: 3%; z-index: 5; }
     .cover-stage .path { width: 46%; left: 27%; bottom: -13%; z-index: 2; opacity: .8; }
-    .cover-stage .cover-tree-left { width: 72%; left: -33%; bottom: 0; z-index: 3; }
-    .cover-stage .cover-tree-right { width: 72%; right: -33%; bottom: 0; z-index: 3; }
+    .cover-stage .cover-tree-left {
+      width: 72%;
+      left: -33%;
+      bottom: 0;
+      z-index: 3;
+      transform-origin: 16% 100%;
+      animation: treeWindLeft 5.2s ease-in-out infinite;
+    }
+    .cover-stage .cover-tree-right {
+      width: 72%;
+      right: -33%;
+      bottom: 0;
+      z-index: 3;
+      transform-origin: 84% 100%;
+      animation: treeWindRight 5.7s ease-in-out -1.8s infinite;
+    }
     .cover-stage .cover-hill { bottom: 0; z-index: 1; }
     .cover-stage .cover-field { bottom: -2%; z-index: 6; }
     .cover-panel {
@@ -475,6 +503,20 @@
 
     @keyframes cloudDrift { from { transform: translateX(0); } to { transform: translateX(710px); } }
     @keyframes sunFloat { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(8px) rotate(2deg); } }
+    @keyframes treeWindLeft {
+      0%, 100% { transform: rotate(-.8deg) skewX(-.25deg); }
+      24% { transform: rotate(.7deg) skewX(.35deg); }
+      52% { transform: rotate(-1.25deg) skewX(-.55deg); }
+      73% { transform: rotate(1.8deg) skewX(.75deg); }
+      87% { transform: rotate(.25deg) skewX(.1deg); }
+    }
+    @keyframes treeWindRight {
+      0%, 100% { transform: rotate(.75deg) skewX(.25deg); }
+      22% { transform: rotate(-.65deg) skewX(-.3deg); }
+      49% { transform: rotate(1.2deg) skewX(.5deg); }
+      71% { transform: rotate(-1.7deg) skewX(-.7deg); }
+      88% { transform: rotate(-.2deg) skewX(-.1deg); }
+    }
     @keyframes flowerSway { 0%,100% { transform: rotate(-1.6deg); } 50% { transform: rotate(1.8deg); } }
     @keyframes leafSway { 0%,100% { transform: rotate(-1deg); } 50% { transform: rotate(2deg); } }
     @keyframes butterflyFloat { 0%,100% { transform: translate(0,0) rotate(-8deg) scaleY(1); } 35% { transform: translate(22px,-28px) rotate(7deg) scaleY(.84); } 70% { transform: translate(-12px,-48px) rotate(-5deg) scaleY(1); } }
@@ -521,7 +563,7 @@
     </div>
 
     <div class="cover-panel">
-      <p class="eyebrow">بِسۡمِ اللهِ الرَّحۡمٰنِ الرَّحِيۡمِ</p>
+      <p class="eyebrow">Undangan Pernikahan</p>
       <h1 class="script-title"><span data-bride-short>Jihan</span></h1>
       <span class="amp">&amp;</span>
       <h1 class="script-title"><span data-groom-short>Risaldi</span></h1>
@@ -530,7 +572,7 @@
         Kepada Yth.
         <span class="guest-name" id="guest-name">Tamu Undangan</span>
       </div>
-      <button class="btn" id="open-invitation" type="button">✦ Buka Undangan ✦</button>
+      <button class="btn" id="open-invitation" type="button">✦ Buka Undangan</button>
     </div>
   </div>
 
@@ -562,7 +604,7 @@
           <span class="amp">&amp;</span>
           <h2 class="script-title" data-groom-short>Risaldi</h2>
           <div class="ornament-line">✦</div>
-          <p class="section-copy">Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada hari pernikahan kami.</p>
+          <p class="section-copy">Dengan memohon rahmat dan rida Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada hari bahagia kami.</p>
           <p class="hero-date" data-date-label>Sabtu, 10 Oktober 2026</p>
         </div>
       </div>
@@ -581,7 +623,7 @@
           <p class="eyebrow">Ar-Rum · 21</p>
           <p class="quran-arabic">وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً</p>
           <p class="quran-translation">“Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.”</p>
-          <p class="quran-source">QS. Ar-Rum: 21</p>
+          <p class="quran-source">QS. AR-RUM: 21</p>
         </div>
       </div>
     </section>
@@ -595,9 +637,9 @@
       <img class="decor bee" style="top:22%;right:11%" src="assets/decor/bee.webp" alt="">
 
       <div class="scene-content">
-        <p class="eyebrow reveal">Assalamu’alaikum Warohmatullahi Wabarokatuh</p>
-        <h2 class="section-title reveal delay-1">Bsimillah</h2>
-        <p class="section-copy reveal delay-2">Dengan penuh rasa syukur, kami menikahkan dua insan yang akan menyatukan langkah dalam ikatan pernikahan.</p>
+        <p class="eyebrow reveal">Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
+        <h2 class="section-title reveal delay-1">Mempelai</h2>
+        <p class="section-copy reveal delay-2">Dengan penuh rasa syukur, kami memperkenalkan dua insan yang akan menyatukan langkah dalam ikatan pernikahan.</p>
 
         <div class="couple-stack">
           <article class="person-card reveal">
@@ -624,7 +666,7 @@
       <img class="decor butterfly" style="top:20%;left:10%" src="assets/decor/butterfly-yellow.webp" alt="">
 
       <div class="scene-content">
-        <p class="eyebrow reveal">In Syaa Allah</p>
+        <p class="eyebrow reveal">Save The Date</p>
         <h2 class="section-title reveal delay-1">Rangkaian Acara</h2>
         <div class="event-grid">
           <article class="event-card reveal">
@@ -660,7 +702,7 @@
       <img class="decor ladybug" style="bottom:13%;right:20%" src="assets/decor/ladybug.webp" alt="">
 
       <div class="scene-content">
-        <p class="eyebrow reveal">Hadiah</p>
+        <p class="eyebrow reveal">Tanda Kasih</p>
         <h2 class="section-title reveal delay-1">Wedding Gift</h2>
         <p class="section-copy reveal delay-2">Doa restu Anda merupakan hadiah terbaik bagi kami. Apabila ingin memberikan tanda kasih, dapat melalui informasi berikut.</p>
         <div class="gift-stack">
@@ -713,7 +755,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="message">Ucapan dan Do'a</label>
+                <label for="message">Ucapan dan Doa</label>
                 <textarea id="message" name="message" rows="3" required placeholder="Tulis doa dan ucapan..."></textarea>
               </div>
               <button class="btn" id="submit-rsvp" type="submit">Kirim Ucapan</button>
@@ -754,12 +796,12 @@
           <p class="family-note">Kami yang berbahagia<br>Keluarga Besar <span data-bride-short>Jihan</span> &amp; <span data-groom-short>Risaldi</span></p>
         </div>
       </div>
-      <p class="copyright">Jazakumullahu Khairan Katsiron &amp; Jihan & Risaldi · 2026</p>
+      <p class="copyright">Undangan Pernikahan Jihan &amp; Risaldi · 2026</p>
     </section>
   </main>
 
   <audio id="background-music" loop preload="none">
-    <source src="assets/audio/lagu-pernikahan.mp3" type="audio/mpeg">
+    <source src="assets/audio/wedding-music.mp3" type="audio/mpeg">
   </audio>
   <button class="music-button" id="music-button" type="button" aria-label="Putar atau hentikan musik" title="Musik">♫</button>
   <div class="toast" id="toast" role="status"></div>
