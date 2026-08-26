@@ -243,6 +243,41 @@
       animation: beetleBodyMove .72s ease-in-out infinite alternate;
     }
 
+    /* KAWANAN KUPU-KUPU DI SETIAP BAGIAN */
+    .butterfly-swarm {
+      position: absolute;
+      inset: 0;
+      z-index: 8;
+      overflow: hidden;
+      pointer-events: none;
+      user-select: none;
+    }
+    .flying-butterfly {
+      position: absolute;
+      left: var(--x, 50%);
+      top: var(--y, 50%);
+      display: block;
+      width: var(--size, 44px);
+      opacity: var(--opacity, .9);
+      pointer-events: none;
+      will-change: transform;
+      animation: butterflySceneFlight var(--duration, 8.5s) ease-in-out var(--delay, 0s) infinite;
+    }
+    .flying-butterfly img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: none;
+      transform-origin: 50% 52%;
+      filter: drop-shadow(0 5px 5px rgba(73, 62, 30, .17));
+      will-change: transform, filter;
+      animation: butterflySceneWing var(--wing-speed, .3s) ease-in-out infinite alternate;
+    }
+    .butterfly-swarm:not(.is-active) .flying-butterfly,
+    .butterfly-swarm:not(.is-active) .flying-butterfly img {
+      animation-play-state: paused;
+    }
+
     /* DEDAUNAN TERTIUP ANGIN DAN PARTIKEL CAHAYA */
     .ambient-layer {
       position: absolute;
@@ -776,6 +811,30 @@
       from { transform: translateY(0) scale(1); }
       to { transform: translateY(-2px) scale(.97, 1.03); }
     }
+    @keyframes butterflySceneFlight {
+      0%, 100% {
+        transform: translate3d(0, 0, 0) rotate(var(--rotate-a, -8deg));
+      }
+      22% {
+        transform: translate3d(var(--route-x1, 28px), var(--route-y1, -24px), 0) rotate(var(--rotate-b, 7deg));
+      }
+      49% {
+        transform: translate3d(var(--route-x2, 8px), var(--route-y2, -46px), 0) rotate(var(--rotate-c, -4deg));
+      }
+      74% {
+        transform: translate3d(var(--route-x3, -24px), var(--route-y3, -18px), 0) rotate(var(--rotate-d, 9deg));
+      }
+    }
+    @keyframes butterflySceneWing {
+      from {
+        transform: perspective(80px) rotateY(-23deg) scaleX(.72) scaleY(.97);
+        filter: brightness(.94) drop-shadow(0 4px 4px rgba(73, 62, 30, .14));
+      }
+      to {
+        transform: perspective(80px) rotateY(21deg) scaleX(1) scaleY(1.03);
+        filter: brightness(1.06) drop-shadow(0 6px 6px rgba(73, 62, 30, .2));
+      }
+    }
     @keyframes ambientLeafDrift {
       0% {
         top: -12%;
@@ -826,6 +885,8 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
       .reveal { opacity: 1; transform: none; }
+      .flying-butterfly,
+      .flying-butterfly img { animation: none !important; }
       .ambient-leaf { display: none; }
       .ambient-light { opacity: .38; animation: none !important; }
     }
@@ -1137,8 +1198,7 @@
       gift: {
         bank: "BANK [NAMA BANK]",
         account: "1234567890",
-        owner: "a.n. [Nama Pemilik Rekening]",
-        address: "[Nama Penerima dan Alamat Lengkap Pengiriman Hadiah]"
+        owner: "a.n. [Nama Pemilik Rekening]"
       },
       // Tempel link Web App Apps Script yang berakhiran /exec di antara tanda kutip.
       // Contoh: "https://script.google.com/macros/s/XXXXXXXXXXXXXXXX/exec"
@@ -1171,7 +1231,6 @@
       fillText("[data-bank-name]", CONFIG.gift.bank);
       fillText("[data-account-number]", CONFIG.gift.account);
       fillText("[data-account-owner]", CONFIG.gift.owner);
-      fillText("[data-gift-address]", CONFIG.gift.address);
       $(".map-akad").href = CONFIG.akad.maps;
       $(".map-reception").href = CONFIG.reception.maps;
       document.title = `Undangan Pernikahan | ${CONFIG.bride.short} & ${CONFIG.groom.short}`;
@@ -1181,6 +1240,84 @@
       const params = new URLSearchParams(location.search);
       const name = params.get("to");
       return name && name.trim() ? name.trim() : "Tamu Undangan";
+    }
+
+    function createButterflySwarms() {
+      const targets = [$(".cover-stage"), ...$$(".scene")].filter(Boolean);
+      const butterflySources = [
+        "assets/decor/butterfly-yellow.webp",
+        "assets/decor/butterfly-white.webp",
+        "assets/decor/butterfly-blue.webp",
+        "assets/decor/butterfly-yellow.webp",
+        "assets/decor/butterfly-white.webp"
+      ];
+      const butterflyPositions = [
+        [7, 14], [73, 25], [17, 51], [76, 67], [43, 83]
+      ];
+      const swarms = [];
+
+      targets.forEach((target, sceneIndex) => {
+        if (target.querySelector(":scope > .butterfly-swarm")) return;
+
+        const swarm = document.createElement("div");
+        swarm.className = "butterfly-swarm";
+        swarm.setAttribute("aria-hidden", "true");
+        const fragment = document.createDocumentFragment();
+
+        butterflySources.forEach((source, index) => {
+          const butterfly = document.createElement("span");
+          const image = document.createElement("img");
+          const base = butterflyPositions[index];
+          const x = (base[0] + sceneIndex * 5) % 84 + 6;
+          const y = (base[1] + sceneIndex * 7) % 80 + 7;
+          const direction = x > 50 ? -1 : 1;
+          const duration = 7.2 + ((index * 1.23 + sceneIndex * .67) % 4.4);
+          const delay = -((index * 2.3 + sceneIndex * 1.1) % duration);
+
+          butterfly.className = "flying-butterfly";
+          butterfly.style.cssText = [
+            `--x:${x}%`,
+            `--y:${y}%`,
+            `--size:${34 + ((index * 4 + sceneIndex) % 17)}px`,
+            `--opacity:${(.78 + ((index + sceneIndex) % 4) * .055).toFixed(2)}`,
+            `--duration:${duration.toFixed(2)}s`,
+            `--delay:${delay.toFixed(2)}s`,
+            `--wing-speed:${(.22 + ((index + sceneIndex) % 4) * .035).toFixed(2)}s`,
+            `--route-x1:${direction * (19 + index * 4)}px`,
+            `--route-y1:${-(12 + (index + sceneIndex) % 15)}px`,
+            `--route-x2:${direction * (34 + sceneIndex % 13)}px`,
+            `--route-y2:${-(31 + index * 4)}px`,
+            `--route-x3:${direction * (12 + index * 5)}px`,
+            `--route-y3:${-(8 + sceneIndex % 18)}px`,
+            `--rotate-a:${direction * -7}deg`,
+            `--rotate-b:${direction * 8}deg`,
+            `--rotate-c:${direction * -4}deg`,
+            `--rotate-d:${direction * 10}deg`
+          ].join(";");
+
+          image.src = source;
+          image.alt = "";
+          image.decoding = "async";
+          butterfly.appendChild(image);
+          fragment.appendChild(butterfly);
+        });
+
+        swarm.appendChild(fragment);
+        target.appendChild(swarm);
+        swarms.push(swarm);
+      });
+
+      if (!("IntersectionObserver" in window)) {
+        swarms.forEach(swarm => swarm.classList.add("is-active"));
+        return;
+      }
+
+      const butterflyObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          entry.target.classList.toggle("is-active", entry.isIntersecting);
+        });
+      }, { rootMargin: "18% 0px" });
+      swarms.forEach(swarm => butterflyObserver.observe(swarm));
     }
 
     function createAmbientEffects() {
@@ -1368,7 +1505,6 @@
       showToast(successMessage);
     }
     $(".copy-account").addEventListener("click", () => copyText(CONFIG.gift.account, "Nomor rekening berhasil disalin"));
-    $(".copy-address").addEventListener("click", () => copyText(CONFIG.gift.address, "Alamat berhasil disalin"));
 
     $("#save-calendar").addEventListener("click", () => {
       const clean = value => value.replace(/[;,]/g, " ");
@@ -1533,6 +1669,7 @@
       }
     });
 
+    createButterflySwarms();
     createAmbientEffects();
     applyConfig();
     $("#guest-name").textContent = getGuestName();
